@@ -76,4 +76,7 @@ public class Product {
                 + Pro_description;
     }
 
+	public static void add(Product product) {
+	}
+
 }

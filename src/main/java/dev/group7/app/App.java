@@ -6,23 +6,28 @@ import java.util.Scanner;
 
 import dev.group7.app.bl.ProductBL;
 import dev.group7.app.dal.DBUtil;
-import dev.group7.app.gui.MemberShip;
-import dev.group7.app.gui.Method;
+import dev.group7.app.ui.MemberShip;
+import dev.group7.app.ui.Method;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
         try (Connection connection = DBUtil.getConnection();) {
             System.out.println("Connected to MySql Server.\n");
+
+            Scanner sc = new Scanner(System.in);
+
+            ProductBL pbl = new ProductBL();
+
             Method mt = new Method();
             MemberShip mbs = new MemberShip();
-            Scanner sc = new Scanner(System.in);
             while (true) {
                 mt.cls();
                 System.out.println("+--------------------------------------+");
                 System.out.println("|            PF10 - Group 7            |");
                 System.out.println("+--------------------------------------+");
-                System.out.println("|       1. Manage MenberShip           |");
-                System.out.println("|    2. View And Search Clothings      |");
+                System.out.println("|       1. Manage MenberShip           |\n");
+                System.out.println("|    2. View And Search Clothings      |\n");
                 System.out.println("|             0. Exit                  |");
                 System.out.println("+--------------------------------------+");
                 System.out.print("Enter Your Choice: ");
@@ -33,7 +38,7 @@ public class App {
                         mbs.MenberShipMenu();
                         break;
                     case "2":
-                        ProductBL.showProduct();
+                        pbl.showProduct();
                         System.out.println("Enter any key to continue : ");
                         sc.nextLine();
                         break;

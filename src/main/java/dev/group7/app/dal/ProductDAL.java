@@ -27,6 +27,7 @@ public class ProductDAL {
         }
         return lst;
     }
+    
 
     public int insertProduct(Product product) {
         try (Connection con = DBUtil.getConnection();
@@ -72,7 +73,7 @@ public class ProductDAL {
 
            int rs = pstm.executeUpdate();
            if (rs==1) {
-               System.out.println("Update Successful!");
+            //    System.out.println("Update Successful!");
            }else{
                System.out.println("Update fail!");
            }

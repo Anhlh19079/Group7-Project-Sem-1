@@ -11,10 +11,11 @@ import java.util.Scanner;
 import dev.group7.app.persistance.Users;
 
 public class UsersDAL {
+    static Scanner sc = new Scanner(System.in);
 
-    // static List<Users> lus = new ArrayList<>();
+    public static int idus = -1;
 
-    public static List<Users> getAllUser() {
+    public List<Users> getAllUser() {
         String sql = "select * from users";
         List<Users> lus = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
@@ -39,44 +40,43 @@ public class UsersDAL {
         return user;
     }
 
-   
-
     public String checklogin(String username, String userpass) throws SQLException {
         Statement stm = null;
         ResultSet rs = null;
         String sql = "select * from users where User_Name ='" + username + "'";
         String role = null;
-        int id = -1;
+        idus = -1;
         try (Connection con = DBUtil.getConnection();) {
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
 
             while (rs.next()) {
                 if (username.equals(rs.getString("User_Name"))) {
-                    id = rs.getInt("User_ID");
+                    idus = rs.getInt("User_ID");
+
                 } else {
                     System.out.println("Wrong Account!!!");
-                    id = -1;
+                    idus = -1;
                     break;
                 }
             }
-            if (id == -1) {
+            if (idus == -1) {
                 return null;
             } else {
-                rs = stm.executeQuery("SELECT * FROM users where User_ID ='" + id + "' ");
+                rs = stm.executeQuery("SELECT * FROM users where User_ID ='" + idus + "' ");
                 while (rs.next()) {
                     if (userpass.equals(rs.getString("User_Pass"))) {
-                        rs = stm.executeQuery("SELECT * FROM users where User_ID = '" + id + "'");
+                        rs = stm.executeQuery("SELECT * FROM users where User_ID = '" + idus + "'");
                         while (rs.next()) {
                             // System.out.println("Valid Acc!");
+                            idus = rs.getInt("User_ID");
                             role = rs.getString("User_Role");
                         }
-                    }else{
+                    } else {
                         System.out.println("Wrong Account!!!");
                     }
                 }
             }
-
         } catch (SQLException e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -85,8 +85,6 @@ public class UsersDAL {
         return role;
     }
 
-    static Scanner sc = new Scanner(System.in);
-
-    
+    // ---------------------------------------------------------------//
 
 }

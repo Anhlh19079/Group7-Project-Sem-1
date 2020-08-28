@@ -1,14 +1,23 @@
-package dev.group7.app.gui;
+package dev.group7.app.ui;
 
 import java.util.Scanner;
 
+import dev.group7.app.bl.OrderBL;
 import dev.group7.app.bl.ProductBL;
+import dev.group7.app.bl.UsersBL;
 
-public class Productgg {
+public class ProductUI {
+    // static Scanner sc = new Scanner(System.in);
+    // static Method mt = new Method();
+    static UsersBL ubl = new UsersBL();
     static Scanner sc = new Scanner(System.in);
     static Method mt = new Method();
+    static OrderUI odg = new OrderUI();
+    static OrderBL obl = new OrderBL();
+    static ProductBL pbl = new ProductBL();
+    static ProductUI pui= new ProductUI();
 
-    public static void menu_manageProduct() {
+    public void menu_manageProduct() {
         boolean w = true;
         while (w) {
             mt.cls();
@@ -19,20 +28,18 @@ public class Productgg {
                 System.out.println("| 3. ShowAllProduct                   |");
                 System.out.println("| 0. Exit                             |");
                 System.out.println("+-------------------------------------+");
-
-                String choice;
                 System.out.print("Nhap lua chon: ");
-                choice = sc.nextLine();
+                String choice = sc.nextLine();
                 switch (choice) {
                     case "1":
                         mt.cls();
-                        ProductBL.insertPro();
+                        pbl.insertPro();
                         break;
                     case "2":
                         mt.cls();
-                        ProductBL.showProduct();
+                        pbl.showProduct();
                         System.out.println("Updates!!!");
-                        ProductBL.inputInfoUpdate();
+                        pbl.inputInfoUpdate();
                         break;
                     case "0":
                         System.out.println("Exit!!!");
@@ -40,14 +47,14 @@ public class Productgg {
                         // System.exit(0);
                         break;
                     case "3":
-                        // cls();
+                        mt.cls();
 
-                        ProductBL.showProduct();
+                        pbl.showProduct();
                         System.out.println("Enter any key to continue :");
                         sc.nextLine();
                         break;
                     default:
-                        System.out.println("ban da nhap sai lua chon. vui long nhap lai!");
+                        System.out.println("You entered incorrectly, please re-enter!\nPress any key...");
                         sc.nextLine();
                         // break;
                 }

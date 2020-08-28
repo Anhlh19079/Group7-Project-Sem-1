@@ -1,24 +1,38 @@
-package dev.group7.app.gui;
+package dev.group7.app.ui;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import dev.group7.app.bl.OrderBL;
 import dev.group7.app.bl.ProductBL;
 import dev.group7.app.bl.UsersBL;
+import dev.group7.app.dal.OrderDAL;
+import dev.group7.app.dal.UsersDAL;
 
 public class MemberShip {
-static UsersBL ubl = new UsersBL();
-    static Scanner sc  = new Scanner(System.in);
+    static UsersBL ubl = new UsersBL();
+    static Scanner sc = new Scanner(System.in);
     static Method mt = new Method();
-    
+    static OrderUI odg = new OrderUI();
+    static OrderBL obl = new OrderBL();
+    static ProductBL pbl = new ProductBL();
+    static ProductUI pui = new ProductUI();
+    static OrderDAL odal = new OrderDAL();
+    int id = 0;
+
     public void MenberShipMenu() throws SQLException {
         String Role = ubl.checkUser();
         UsersBL ubl = new UsersBL();
+        id = UsersDAL.idus;
         if (Role == null) {
             ubl.checkUser();
         } else if (Role.equals("Admin")) {
+
+            // System.out.println(id);
             AdminMenu();
         } else if (Role.equals("Customer")) {
+            // System.out.println(id);
+
             CustomerMenu();
         } else {
             System.out.println("Error!");
@@ -26,7 +40,8 @@ static UsersBL ubl = new UsersBL();
 
     }
 
-    public static void CustomerMenu() {
+    public static void CustomerMenu() throws SQLException {
+
         boolean w = true;
         while (w) {
 
@@ -46,21 +61,31 @@ static UsersBL ubl = new UsersBL();
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                mt.cls();
-                ProductBL.showProduct();
-                System.out.println("Enter any key to continue: ");
-                sc.nextLine();
+                    mt.cls();
+                    pbl.showProduct();
+                    System.out.println("Enter any key to continue: ");
+                    sc.nextLine();
                     break;
 
                 case "2":
-
+                    mt.cls();
+                    pbl.showProduct();
+                    OrderBL.CreateOrder();
+                    // OrderBL.addorder();
+                    System.out.println("Enter any key to continue: ");
+                    sc.nextLine();
                     break;
+
                 case "3":
+                    mt.cls();
+                    odg.Manage_Order_Customer();
+                    System.out.println("Enter any key to continue: ");
+                    sc.nextLine();
                     break;
 
                 case "0":
                     System.out.println("Exit!");
-                    w=false;
+                    w = false;
                     break;
                 default:
                     System.out.print("Nhap sai ! nhap lai: ");
@@ -72,7 +97,8 @@ static UsersBL ubl = new UsersBL();
     }
 
     public static void AdminMenu() {
-       boolean w=true;
+
+        boolean w = true;
         while (w) {
             mt.cls();
             System.out.println("Login Successful!");
@@ -92,23 +118,24 @@ static UsersBL ubl = new UsersBL();
             switch (choice) {
                 case "1":
                     mt.cls();
-                    Productgg.menu_manageProduct();
+                    pui.menu_manageProduct();
                     break;
 
                 case "2":
-
+                    mt.cls();
+                    odg.Manage_Order_Admin();
                     break;
                 case "3":
                     mt.cls();
-                    UsersBL.showUsers();
+                    ubl.showUsers();
                     System.out.println("Enter any key to continue: ");
                     sc.nextLine();
                     break;
                 case "0":
                     // System.out.println("Ket thuc chuong trinh!!!");
                     System.out.println("Exit!");
-                    w=false;
-                   break;
+                    w = false;
+                    break;
 
                 default:
                     System.out.println("Nhap sai ! nhap lai: ");

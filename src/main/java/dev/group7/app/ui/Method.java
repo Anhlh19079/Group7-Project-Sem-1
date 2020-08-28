@@ -1,10 +1,12 @@
-package dev.group7.app.gui;
+package dev.group7.app.ui;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Method {
-static Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
+
     public String yesno() {
         String yn = sc.nextLine();
         if (yn.equalsIgnoreCase("N") || yn.equalsIgnoreCase("Y")) {
@@ -13,6 +15,7 @@ static Scanner sc = new Scanner(System.in);
         return yn;
     }
 
+    // 
 
     public void cls() {
         try {

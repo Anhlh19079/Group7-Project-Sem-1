@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import dev.group7.app.dal.ProductDAL;
-import dev.group7.app.gui.Method;
 import dev.group7.app.persistance.Product;
+import dev.group7.app.ui.Method;
 
 public class ProductBL {
     public static ProductDAL productDAL = new ProductDAL();
@@ -21,13 +21,13 @@ public class ProductBL {
         return productDAL.insertProduct(product) > 0;
     }
 
-    public static void showProduct() {
+    public void showProduct() {
         ProductBL pbls = new ProductBL();
         List<Product> lst = pbls.getAll();
         System.out.println("\nItem List: ");
         System.out.println(
-                "+------------------------------------------------------------------------------------------------------------------------------------+");
-        System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-40s |\n", "ID", "Tên Sản Phẩm", "Đơn Giá",
+            "+------------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-40s |\n", "ID", "Tên Sản Phẩm", "Đơn Giá",
                 "Số Lượng", "Status", "Mô Tả");
         System.out.println(
                 "+------------------------------------------------------------------------------------------------------------------------------------+");
@@ -43,7 +43,7 @@ public class ProductBL {
     }
 
     // static List<Product> PR = new ArrayList<>();
-    public static void insertPro() {
+    public void insertPro() {
         while (true) {
 
             ProductBL proBL = new ProductBL();
@@ -88,7 +88,7 @@ public class ProductBL {
         return product;
     }
 
-    public static void inputInfoUpdate() {
+    public void inputInfoUpdate() {
 
         while (true) {
 
