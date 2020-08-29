@@ -35,6 +35,7 @@ public class App {
                 switch (choice) {
                     case "1":
                         mt.cls();
+                        
                         mbs.MenberShipMenu();
                         break;
                     case "2":

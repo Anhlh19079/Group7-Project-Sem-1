@@ -88,7 +88,7 @@ public class OrderBL {
     // tao orderdetail
     public static Order Orderdetailsnew() throws SQLException {
         Product product = new Product();
-        ProductBL pbls = new ProductBL();
+        // ProductBL pbls = new ProductBL();
         Order orderdetail = new Order();
         int id;
         int dem = 0;// đếm sản phẩm thứ ?
@@ -211,12 +211,12 @@ public class OrderBL {
 
     // ------------------SHOW ORDER-------------------
     // ---------
-    public static void showByID() {
+    public void showByID() {
         showAllOrderById();
         showOrderdetailsById();
     }
 
-    public static void showAllorder() {
+    public static void showAllorder_oredrdt() {
         System.out.println("\nList Orders");
         showAllOrder();
         System.out.println("-----------------------------");
@@ -278,4 +278,42 @@ public class OrderBL {
         System.out.println("+----------------------------------------------------------------+");
     }
 
+
+    public static void UpdateStatusOrder() {
+
+        while (true) {
+
+            Order order = new Order();
+            OrderDAL OD = new OrderDAL();
+            List<Order> LOD = new ArrayList<>();
+
+            System.out.print("Nhap Order_id : ");
+            int id = Integer.parseInt(sc.nextLine());
+            order.setOrder_id(id);
+
+            
+
+            System.out.print("Update Status: ");
+            order.setStatus(sc.nextLine());
+
+            System.out.println("ban co muon update status order(y/n)?");
+            String choice = mt.yesno();
+            if (choice.equalsIgnoreCase("y")) {
+                LOD.add(order);
+                try {
+                    OD.updateOrder(order);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Error occurred, cannot update!");
+            }
+            System.out.println("Do you want to continue to update the Order?(y/n)");
+            String x = mt.yesno();
+            if (x.equalsIgnoreCase("n")) {
+                break;
+            }
+        }
+    }
 }

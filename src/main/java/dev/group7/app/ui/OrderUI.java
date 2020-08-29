@@ -2,7 +2,6 @@ package dev.group7.app.ui;
 
 import java.util.Scanner;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import dev.group7.app.bl.OrderBL;
 
@@ -28,13 +27,15 @@ public class OrderUI {
                 String choice = sc.nextLine();
                 switch (choice) {
                     case "1":
-
+                    mt.cls();
+                    OrderBL.showAllOrder();
+                    OrderBL.UpdateStatusOrder();
                         break;
 
                     case "2":
-                        // mt.cls();
+                        mt.cls();
                         System.out.println("\nList Orders");
-                        OrderBL.showAllorder();
+                        OrderBL.showAllorder_oredrdt();
                         System.out.println("Enter any key to continue :");
                         sc.nextLine();
                         break;

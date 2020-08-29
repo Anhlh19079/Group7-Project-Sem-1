@@ -40,7 +40,7 @@ public class OrderDAL {
         List<Order> lbid = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
                 Statement stm = con.createStatement();
-                ResultSet rs = stm.executeQuery("select * from orders where orders.User_ID="+idus)) {
+                ResultSet rs = stm.executeQuery("select * from orders where orders.User_ID=" + idus)) {
             while (rs.next()) {
                 lbid.add(getOrder(rs));
             }
@@ -50,7 +50,8 @@ public class OrderDAL {
         }
         return lbid;
     }
-    public static List<Order> getAllOrderDetals() {
+
+    public List<Order> getAllOrderDetals() {
         String sql = "select * from orderdetails";
         List<Order> ldt = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
@@ -65,11 +66,13 @@ public class OrderDAL {
         }
         return ldt;
     }
+
     public List<Order> getAllOrderDetalsById() {
         int idus = 0;
         idus += udal.idus;
         // System.out.println("ID orderdtttt: "+idus);
-        String sql = ("select od.Order_id,u.User_ID ,p.Pro_id, o.Order_totalPrice , od.Quantity from users as u inner join orders as o on u.User_ID=o.User_ID inner join orderdetails as od on o.Order_id = od.Order_id inner join products as p on od.Pro_id = p.Pro_id where u.User_ID = "+idus);
+        String sql = ("select od.Order_id,u.User_ID ,p.Pro_id, o.Order_totalPrice , od.Quantity from users as u inner join orders as o on u.User_ID=o.User_ID inner join orderdetails as od on o.Order_id = od.Order_id inner join products as p on od.Pro_id = p.Pro_id where u.User_ID = "
+                + idus);
         List<Order> ldt = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
                 Statement stm = con.createStatement();
@@ -83,6 +86,7 @@ public class OrderDAL {
         }
         return ldt;
     }
+
     public static Order getOrderdtByid(ResultSet rs) throws SQLException {
         Order odtid = new Order();
         odtid.setOrder_id(rs.getInt("Order_id"));
@@ -93,6 +97,7 @@ public class OrderDAL {
 
         return odtid;
     }
+
     public static Order getOrderdt(ResultSet rs) throws SQLException {
         Order odt = new Order();
         odt.setOrder_id(rs.getInt("Order_id"));
@@ -102,6 +107,7 @@ public class OrderDAL {
 
         return odt;
     }
+
     public static Order getOrder(ResultSet rs) throws SQLException {
         Order order = new Order();
         order.setOrder_id(rs.getInt("Order_id"));
@@ -165,5 +171,27 @@ public class OrderDAL {
             return false;
         }
         return true;
+    }
+
+    public int updateOrder(Order order) throws SQLException {
+        try (Connection con = DBUtil.getConnection();
+                PreparedStatement pstm = con
+                        .prepareStatement("update Orders SET Order_status = ? where Order_id = ?;");) {
+            pstm.setString(1, order.getStatus());
+            pstm.setInt(2, order.getOrder_id());
+
+            int rs = pstm.executeUpdate();
+            if (rs == 1) {
+                System.out.println("Update order Successful!");
+            } else {
+                System.out.println("Update fail!");
+            }
+            return rs;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("loi update!");
+            return 0;
+
+        }
     }
 }
