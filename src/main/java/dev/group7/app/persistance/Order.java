@@ -15,9 +15,6 @@ public class Order {
     private double unit_price;
     private int quantity;
 
-    // private static List<Product> products;
-    // private static List<Order> orderdetails;
-
     public Order() {
     }
 
@@ -42,7 +39,6 @@ public class Order {
     }
 
     public int getUser_id() {
-        // System.out.println(user_id);
         return user_id;
     }
 
@@ -78,28 +74,6 @@ public class Order {
     public Users getUsers() {
         return user;
     }
-
-    // public static List<Product> getProducts() {
-    //     return products;
-    // }
-
-    // public void addProduct(Product product) {
-    //     if (products == null) {
-    //         products = new ArrayList<>();
-    //     }
-    //     products.add(product);
-    // }
-
-    // public static List<Order> getOrderdetail() {
-    //     return orderdetails;
-    // }
-    // public void addOrderdetail(Order orderdetail) {
-    //     if (orderdetails == null) {
-    //         orderdetails = new ArrayList<>();
-    //     }
-    //     orderdetails.add(orderdetail);
-    // }
-    // --//
 
     public void setPro_id(int pro_id) {
         this.pro_id = pro_id;

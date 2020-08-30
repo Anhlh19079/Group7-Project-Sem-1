@@ -17,7 +17,7 @@ public class OrderDAL {
     static Scanner sc = new Scanner(System.in);
     static UsersDAL udal = new UsersDAL();
 
-    public static List<Order> getAllOrders() {
+    public List<Order> getAllOrders() {
         String sql = "select * from orders";
         List<Order> lod = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
@@ -36,7 +36,6 @@ public class OrderDAL {
     public List<Order> getAllOrdersById() {
         int idus = 0;
         idus += udal.idus;
-        // String sql = "select * from orders where User_id = '" + idus + "'";
         List<Order> lbid = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
                 Statement stm = con.createStatement();
@@ -70,8 +69,7 @@ public class OrderDAL {
     public List<Order> getAllOrderDetalsById() {
         int idus = 0;
         idus += udal.idus;
-        // System.out.println("ID orderdtttt: "+idus);
-        String sql = ("select od.Order_id,u.User_ID ,p.Pro_id, o.Order_totalPrice , od.Quantity from users as u inner join orders as o on u.User_ID=o.User_ID inner join orderdetails as od on o.Order_id = od.Order_id inner join products as p on od.Pro_id = p.Pro_id where u.User_ID = "
+        String sql = ("select od.Order_id,u.User_ID ,p.Pro_id, od.Unit_price , od.Quantity from users as u inner join orders as o on u.User_ID=o.User_ID inner join orderdetails as od on o.Order_id = od.Order_id inner join products as p on od.Pro_id = p.Pro_id where u.User_ID = "
                 + idus);
         List<Order> ldt = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
@@ -92,7 +90,7 @@ public class OrderDAL {
         odtid.setOrder_id(rs.getInt("Order_id"));
         odtid.setUser_id(rs.getInt("User_id"));
         odtid.setPro_id(rs.getInt("Pro_id"));
-        odtid.setTotal_price(rs.getDouble("Order_totalPrice"));
+        odtid.setUnit_price(rs.getDouble("Unit_price"));
         odtid.setQuantity(rs.getInt("Quantity"));
 
         return odtid;
@@ -139,7 +137,6 @@ public class OrderDAL {
     public boolean insertOrder(Order order, List<Order> listdt) {
         try (Connection con = DBUtil.getConnection(); Statement stm = con.createStatement();) {
             // insert Order
-            // System.out.println("Id-order: " + reOrderID());
             try (PreparedStatement pstm = con.prepareStatement(
                     "insert into Orders(Order_id,User_ID, Order_date,Order_totalPrice,Order_status) values (?,?,?,?,?);");) {
                 pstm.setInt(1, reOrderID() + 1);
@@ -191,7 +188,6 @@ public class OrderDAL {
             ex.printStackTrace();
             System.out.println("loi update!");
             return 0;
-
         }
     }
 }

@@ -1,53 +1,42 @@
-package dev.group7.app.ui;
+package dev.group7.app.ui.userui;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-
-import dev.group7.app.bl.OrderBL;
-import dev.group7.app.bl.ProductBL;
-import dev.group7.app.bl.UsersBL;
-import dev.group7.app.dal.OrderDAL;
 import dev.group7.app.dal.UsersDAL;
+import dev.group7.app.ui.Method;
+import dev.group7.app.ui.orderui.OrderDetailsUI;
+import dev.group7.app.ui.orderui.OrderUI;
+import dev.group7.app.ui.productui.ProductUI;
 
 public class MemberShip {
-    static UsersBL ubl = new UsersBL();
     static Scanner sc = new Scanner(System.in);
     static Method mt = new Method();
-    static OrderUI odg = new OrderUI();
-    static OrderBL obl = new OrderBL();
-    static ProductBL pbl = new ProductBL();
+    static OrderUI oui = new OrderUI();
+    static OrderDetailsUI odui = new OrderDetailsUI();
     static ProductUI pui = new ProductUI();
-    static OrderDAL odal = new OrderDAL();
+    static UserUI uiu = new UserUI();
     int id = 0;
 
     public void MenberShipMenu() throws SQLException {
-        String Role = ubl.checkUser();
-        UsersBL ubl = new UsersBL();
+        String Role = uiu.checkUser();
         id = UsersDAL.idus;
         if (Role == null) {
-            ubl.checkUser();
+            uiu.checkUser();
         } else if (Role.equals("Admin")) {
-
-            // System.out.println(id);
             AdminMenu();
         } else if (Role.equals("Customer")) {
-            // System.out.println(id);
-
             CustomerMenu();
         } else {
             System.out.println("Error!");
         }
-
     }
 
     public static void CustomerMenu() throws SQLException {
-
         boolean w = true;
         while (w) {
-
             mt.cls();
             System.out.println("Login Successful!");
-            System.out.println("UI Cus!");
+            System.out.println("=============== Customer ===============");
             System.out.println("+--------------------------------------+");
             System.out.println("|            PF10 - Group 7            |");
             System.out.println("+--------------------------------------+");
@@ -62,23 +51,24 @@ public class MemberShip {
             switch (choice) {
                 case "1":
                     mt.cls();
-                    pbl.showProduct();
+                    pui.showProduct();
+                    pui.SearchProByName();
                     System.out.println("Enter any key to continue: ");
                     sc.nextLine();
                     break;
 
                 case "2":
                     mt.cls();
-                    pbl.showProduct();
-                    OrderBL.CreateOrder();
-                    // OrderBL.addorder();
+                    pui.showProduct();
+                    oui.CreateOrder();
                     System.out.println("Enter any key to continue: ");
                     sc.nextLine();
                     break;
 
                 case "3":
                     mt.cls();
-                    odg.Manage_Order_Customer();
+                    oui.showAllOrderById();
+                    odui.showOrderdetailsById();
                     System.out.println("Enter any key to continue: ");
                     sc.nextLine();
                     break;
@@ -90,19 +80,16 @@ public class MemberShip {
                 default:
                     System.out.print("Nhap sai ! nhap lai: ");
                     sc.nextLine();
-
             }
         }
-
     }
 
     public static void AdminMenu() {
-
         boolean w = true;
         while (w) {
             mt.cls();
             System.out.println("Login Successful!");
-            System.out.println("UI Adm!");
+            System.out.println("================ Admin =================");
             System.out.println("+--------------------------------------+");
             System.out.println("|            PF10 - Group 7            |");
             System.out.println("+--------------------------------------+");
@@ -113,8 +100,6 @@ public class MemberShip {
             System.out.println("+--------------------------------------+");
             System.out.print("Input Your Choice: ");
             String choice = sc.nextLine();
-            // while (true) {
-
             switch (choice) {
                 case "1":
                     mt.cls();
@@ -123,16 +108,15 @@ public class MemberShip {
 
                 case "2":
                     mt.cls();
-                    odg.Manage_Order_Admin();
+                    oui.Manage_Order_Admin();
                     break;
                 case "3":
                     mt.cls();
-                    ubl.showUsers();
+                    uiu.showUsers();
                     System.out.println("Enter any key to continue: ");
                     sc.nextLine();
                     break;
                 case "0":
-                    // System.out.println("Ket thuc chuong trinh!!!");
                     System.out.println("Exit!");
                     w = false;
                     break;
@@ -142,9 +126,6 @@ public class MemberShip {
                     sc.nextLine();
                     // break;
             }
-            // break;
-            // }
-            // break;
         }
     }
 }

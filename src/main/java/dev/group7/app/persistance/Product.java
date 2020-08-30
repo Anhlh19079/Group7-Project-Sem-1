@@ -70,13 +70,4 @@ public class Product {
         return Pro_description;
     }
 
-    @Override
-    public String toString() {
-        return Pro_id + " - " + Pro_name + " - " + Unit_price + " - " + Pro_amount + " - " + Pro_status + " - "
-                + Pro_description;
-    }
-
-	public static void add(Product product) {
-	}
-
 }

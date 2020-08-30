@@ -27,7 +27,24 @@ public class ProductDAL {
         }
         return lst;
     }
-    
+
+    public List<Product> getProductByName(String name) {
+
+        List<Product> litspro = new ArrayList<>();
+        try {
+            Connection con = DBUtil.getConnection();
+            PreparedStatement pstm = con
+                    .prepareStatement("select * from Products where Products.Pro_name like ('%" + name + "%');");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                litspro.add(getProduct(rs));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return litspro;
+    }
 
     public int insertProduct(Product product) {
         try (Connection con = DBUtil.getConnection();
@@ -55,7 +72,6 @@ public class ProductDAL {
         product.setAmount(rs.getInt("Pro_amount"));
         product.setPro_status(rs.getString("Pro_status"));
         product.setDescription(rs.getString("Pro_description"));
-
         return product;
     }
 
@@ -70,25 +86,17 @@ public class ProductDAL {
             pstm.setString(4, product.getPro_status());
             pstm.setString(5, product.getDescription());
             pstm.setInt(6, product.getPro_id());
-
-           int rs = pstm.executeUpdate();
-           if (rs==1) {
-            //    System.out.println("Update Successful!");
-           }else{
-               System.out.println("Update fail!");
-           }
-           return rs;
+            int rs = pstm.executeUpdate();
+            if (rs == 1) {
+                // System.out.println("Update Successful!");
+            } else {
+                System.out.println("Update fail!");
+            }
+            return rs;
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("loi update!");
             return 0;
-            
         }
     }
-
-
-
-    
 }
-        
-        

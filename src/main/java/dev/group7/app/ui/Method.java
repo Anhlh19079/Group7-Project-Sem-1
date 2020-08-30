@@ -14,8 +14,6 @@ public class Method {
         return yn;
     }
 
-    // 
-
     public void cls() {
         try {
             if (System.getProperty("os.name").contains("Windows"))
