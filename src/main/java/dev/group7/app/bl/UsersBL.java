@@ -12,8 +12,10 @@ public class UsersBL {
     public List<Users> getAllus() {
         return udal.getAllUser();
     }
-
     public String checkUserLogin(String username, String userpass) throws SQLException {
         return udal.checklogin(username, userpass);
     }
+    // public boolean loginuser(String username, String userpass) throws SQLException {
+    //     return udal.login(username, userpass);
+    // }
 }

@@ -1,13 +1,11 @@
 package dev.group7.app.ui.orderui;
 
 import java.util.List;
-import java.util.Scanner;
 
 import dev.group7.app.bl.OrderBL;
 import dev.group7.app.persistance.Order;
 
 public class OrderDetailsUI {
-    static Scanner sc = new Scanner(System.in);
     static OrderBL obl = new OrderBL();
 
     public void showOrderdetails() {
@@ -16,8 +14,9 @@ public class OrderDetailsUI {
         System.out.println("+------------------------------------------------------------------+");
         System.out.printf("| %-10s | %-10s | %-25s | %-10s |\n", "Order_id", "Product_id", "Unit_price", "Quantity");
         System.out.println("+------------------------------------------------------------------+");
-        if (lodt.isEmpty())
+        if (lodt.isEmpty()) {
             System.out.println("Empty list!");
+        }
         for (Order odt : lodt) {
             System.out.printf("| %-10d | %-10d | %-25.2f | %-10d |\n", odt.getOrder_id(), odt.getPro_id(),
                     odt.getUnit_price(), odt.getQuantity());
@@ -29,12 +28,11 @@ public class OrderDetailsUI {
         List<Order> listbyid = obl.OrderDetailsById();
         System.out.println("\nOrderDetails List");
         System.out.println("+--------------------------------------------------------------------------------+");
-        System.out.printf("| %-10s | %-10s | %-10s | %-25s | %-10s  |\n", "Order_id", "User_id", "Pro_id", "TotalPrice",
+        System.out.printf("| %-10s | %-10s | %-10s | %-25s | %-10s  |\n", "Order_id", "User_id", "Pro_id", "Unit_price",
                 "Quantity");
         System.out.println("+--------------------------------------------------------------------------------+");
-        if (listbyid.isEmpty()){
-                        System.out.println("Empty list!");
-
+        if (listbyid.isEmpty()) {
+            System.out.println("Empty list!");
         }
         for (Order odtid : listbyid) {
             System.out.printf("| %-10d | %-10d | %-10d | %-25.2f | %-10d  |\n", odtid.getOrder_id(), odtid.getUser_id(),

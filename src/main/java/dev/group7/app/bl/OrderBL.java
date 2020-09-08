@@ -29,7 +29,7 @@ public class OrderBL {
         return ORD.getAllOrderDetals();
     }
 
-    public static List<Order> OrderById() {
+    public List<Order> OrderById() {
         return ORD.getAllOrdersById();
     }
 

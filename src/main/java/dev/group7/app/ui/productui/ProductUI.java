@@ -23,12 +23,12 @@ public class ProductUI {
             System.out.println("\nItem List: ");
             System.out.println(
                     "+-------------------------------------------------------------------------------------------------------------------------------+");
-            System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", "ID", "Tên Sản Phẩm", "Đơn Giá",
-                    "Số Lượng", "Status", "Mô Tả");
+            System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", "ID", "Product Name",
+                    "Unit Price", "Amount", "Status", "Description");
             System.out.println(
                     "+-------------------------------------------------------------------------------------------------------------------------------+");
             if (listpro.isEmpty())
-                System.out.println("Danh sach Trong!");
+                System.out.println("The list is empty!");
             for (Product p : listpro) {
                 System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", p.getPro_id(),
                         p.getPro_name(), p.getUnitPrice(), p.getAmount(), p.getPro_status(), p.getDescription());
@@ -46,12 +46,12 @@ public class ProductUI {
         System.out.println("\nItem List: ");
         System.out.println(
                 "+-------------------------------------------------------------------------------------------------------------------------------+");
-        System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", "ID", "Tên Sản Phẩm", "Đơn Giá",
-                "Số Lượng", "Status", "Mô Tả");
+        System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", "ID", "Product Name", "Unit Price",
+                "Amount", "Status", "Description");
         System.out.println(
                 "+-------------------------------------------------------------------------------------------------------------------------------+");
         if (lst.isEmpty())
-            System.out.println("Danh sach Trong!");
+            System.out.println("The list is empty!");
         for (Product p : lst) {
             System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", p.getPro_id(), p.getPro_name(),
                     p.getUnitPrice(), p.getAmount(), p.getPro_status(), p.getDescription());
@@ -106,7 +106,7 @@ public class ProductUI {
             Product product = new Product();
             List<Product> PR = new ArrayList<>();
 
-            System.out.print("Nhap Product_id : ");
+            System.out.print("Enter Product_id : ");
             int id = Integer.parseInt(sc.nextLine());
             product.setPro_id(id);
 
@@ -127,7 +127,7 @@ public class ProductUI {
             System.out.print("Update Status: ");
             product.setPro_status(sc.nextLine());
 
-            System.out.println("ban co muon update san pham(y/n)?");
+            System.out.print("Do you want to Update product?(y/n): ");
             String choice = mt.yesno();
             if (choice.equalsIgnoreCase("y")) {
                 PR.add(product);
@@ -140,7 +140,7 @@ public class ProductUI {
             } else {
                 System.out.println("Error occurred, cannot update!");
             }
-            System.out.println("Do you want to continue to update the product?(y/n)");
+            System.out.print("Do you want to continue to update the product?(y/n): ");
             String x = mt.yesno();
             if (x.equalsIgnoreCase("n")) {
                 break;
@@ -153,8 +153,10 @@ public class ProductUI {
         while (w) {
             mt.cls();
             try {
-                System.out.println("+--------------------------------------+");
-                System.out.println("|             PF10 - Group 7           |");
+                System.out.println("+======================================+");
+                System.out.println("|            PF10 - Group 7            |");
+                System.out.println("|      Welcome to Clothings Store      |");
+                System.out.println("|            Manage Product            |");
                 System.out.println("+--------------------------------------+");
                 System.out.println("| 1.          Insert Product           |");
                 System.out.println("| 2.          Update product           |");
@@ -166,12 +168,25 @@ public class ProductUI {
                 switch (choice) {
                     case "1":
                         mt.cls();
+
+                        System.out.println("+======================================+");
+                        System.out.println("|            PF10 - Group 7            |");
+                        System.out.println("|      Welcome to Clothings Store      |");
+                        System.out.println("+--------------------------------------+");
+                        System.out.println("|            Insert Product            |");
+                        System.out.println("+--------------------------------------+");
                         pui.insertPro();
                         break;
                     case "2":
                         mt.cls();
+
+                        System.out.println("+======================================+");
+                        System.out.println("|            PF10 - Group 7            |");
+                        System.out.println("|      Welcome to Clothings Store      |");
+                        System.out.println("+--------------------------------------+");
+                        System.out.println("|            Update Product            |");
+                        System.out.println("+--------------------------------------+");
                         pui.showProduct();
-                        System.out.println("Updates!!!");
                         pui.inputInfoUpdate();
                         break;
                     case "0":
@@ -180,12 +195,18 @@ public class ProductUI {
                         break;
                     case "3":
                         mt.cls();
+                        System.out.println("+======================================+");
+                        System.out.println("|            PF10 - Group 7            |");
+                        System.out.println("|      Welcome to Clothings Store      |");
+                        System.out.println("+--------------------------------------+");
+                        System.out.println("|             View Product             |");
+                        System.out.println("+--------------------------------------+");
                         pui.showProduct();
-                        System.out.println("Enter any key to continue :");
+                        System.out.print("Enter any key to continue...");
                         sc.nextLine();
                         break;
                     default:
-                        System.out.println("You entered incorrectly, please re-enter!\nPress anykey...");
+                        System.out.print("You entered incorrectly, please re-enter!\nPress anykey...");
                         sc.nextLine();
                 }
 

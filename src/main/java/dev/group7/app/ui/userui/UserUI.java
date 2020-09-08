@@ -17,10 +17,10 @@ public class UserUI {
         boolean w = true;
         try {
             while (w) {
-                System.out.print("Nhap User Name: ");
+                System.out.print("Enter Username: ");
                 String name = sc.nextLine();
 
-                System.out.print("Nhap PassWord: ");
+                System.out.print("Enter PassWord: ");
                 String pass = sc.nextLine();
 
                 if (name.trim().isEmpty() || pass.trim().isEmpty()) {
@@ -39,6 +39,7 @@ public class UserUI {
                     }
                 } else {
                     Role = ubl.checkUserLogin(name, pass);
+                   
                     if (Role == null) {
                         System.out.println("Account or password is incorrect, please re-enter");
                         System.out.println("Enter to continue!");
@@ -60,16 +61,17 @@ public class UserUI {
     public void showUsers() {
         List<Users> lus = ubl.getAllus();
         System.out.println("\nUsers List: ");
-        System.out.println("+-----------------------------------------------------------------------+");
-        System.out.printf("| %-10s | %-25s | %-15s | %-10s | \n", "ID", "User Name", "User Password", "Role");
-        System.out.println("+-----------------------------------------------------------------------+");
+        System.out.println("+------------------------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-10s | %-25s | %-15s | %-20s | %-20s | %-10s | %-12s | \n", "ID", "User Name", "User Password","User Phone","User Email", "Role","Status");
+        System.out.println("+------------------------------------------------------------------------------------------------------------------------------------+");
         if (lus.isEmpty())
             System.out.println("Danh sach Trong!");
         for (Users us : lus) {
-            System.out.printf("| %-10s | %-25s | %-15s | %-10s | \n", us.getUserId(), us.getUserName(),
-                    us.getUserPass(), us.getRole());
+            System.out.printf("| %-10d | %-25s | %-15s | %-20s | %-20s | %-10s | %-12s | \n", us.getUserId(), us.getUserName(),
+                    us.getUserPass(),us.getUserphone(),us.getUseremail(), us.getRole(),us.getUserstatus());
         }
-        System.out.println("+-----------------------------------------------------------------------+");
+        System.out.println("+------------------------------------------------------------------------------------------------------------------------------------+");
     }
 
+    
 }

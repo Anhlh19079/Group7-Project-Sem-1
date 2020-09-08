@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import dev.group7.app.dal.UsersDAL;
 import dev.group7.app.ui.Method;
-import dev.group7.app.ui.orderui.OrderDetailsUI;
 import dev.group7.app.ui.orderui.OrderUI;
 import dev.group7.app.ui.productui.ProductUI;
 
@@ -12,15 +11,15 @@ public class MemberShip {
     static Scanner sc = new Scanner(System.in);
     static Method mt = new Method();
     static OrderUI oui = new OrderUI();
-    static OrderDetailsUI odui = new OrderDetailsUI();
     static ProductUI pui = new ProductUI();
     static UserUI uiu = new UserUI();
     int id = 0;
 
-    public void MenberShipMenu() throws SQLException {
+    public void MemberShipMenu() throws SQLException {
         String Role = uiu.checkUser();
         id = UsersDAL.idus;
         if (Role == null) {
+
             uiu.checkUser();
         } else if (Role.equals("Admin")) {
             AdminMenu();
@@ -37,8 +36,8 @@ public class MemberShip {
             mt.cls();
             System.out.println("Login Successful!");
             System.out.println("=============== Customer ===============");
-            System.out.println("+--------------------------------------+");
-            System.out.println("|            PF10 - Group 7            |");
+            System.out.println("+======================================+");
+            System.out.println("|      Welcome to Clothings Store      |");
             System.out.println("+--------------------------------------+");
             System.out.println("| 1. Search Clotings.                  |");
             System.out.println("| 2. Buy Items.                        |");
@@ -51,6 +50,12 @@ public class MemberShip {
             switch (choice) {
                 case "1":
                     mt.cls();
+                    System.out.println("+======================================+");
+                    System.out.println("|            PF10 - Group 7            |");
+                    System.out.println("|      Welcome to Clothings Store      |");
+                    System.out.println("|               Search                 |");
+                    System.out.println("+--------------------------------------+");
+                    
                     pui.showProduct();
                     pui.SearchProByName();
                     System.out.println("Enter any key to continue: ");
@@ -59,6 +64,11 @@ public class MemberShip {
 
                 case "2":
                     mt.cls();
+                    System.out.println("+======================================+");
+                    System.out.println("|            PF10 - Group 7            |");
+                    System.out.println("|      Welcome to Clothings Store      |");
+                    System.out.println("|              Buy item                |");
+                    System.out.println("+--------------------------------------+");
                     pui.showProduct();
                     oui.CreateOrder();
                     System.out.println("Enter any key to continue: ");
@@ -67,8 +77,12 @@ public class MemberShip {
 
                 case "3":
                     mt.cls();
-                    oui.showAllOrderById();
-                    odui.showOrderdetailsById();
+                    System.out.println("+======================================+");
+                    System.out.println("|            PF10 - Group 7            |");
+                    System.out.println("|      Welcome to Clothings Store      |");
+                    System.out.println("|          View History Order          |");
+                    System.out.println("+--------------------------------------+");
+                    oui.Manage_Order_Customer();
                     System.out.println("Enter any key to continue: ");
                     sc.nextLine();
                     break;
@@ -90,8 +104,8 @@ public class MemberShip {
             mt.cls();
             System.out.println("Login Successful!");
             System.out.println("================ Admin =================");
-            System.out.println("+--------------------------------------+");
-            System.out.println("|            PF10 - Group 7            |");
+            System.out.println("+======================================+");
+            System.out.println("|      Welcome to Clothings Store      |");
             System.out.println("+--------------------------------------+");
             System.out.println("| 1. Manage Products.                  |");
             System.out.println("| 2. Manage Order.                     |");
@@ -122,7 +136,7 @@ public class MemberShip {
                     break;
 
                 default:
-                    System.out.println("Nhap sai ! nhap lai: ");
+                    System.out.println("Enter incorrectly, re-enter: ");
                     sc.nextLine();
                     // break;
             }

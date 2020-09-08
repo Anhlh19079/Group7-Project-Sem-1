@@ -11,7 +11,6 @@ import java.util.Scanner;
 import dev.group7.app.persistance.Users;
 
 public class UsersDAL {
-    static Scanner sc = new Scanner(System.in);
 
     public static int idus = -1;
 
@@ -33,26 +32,31 @@ public class UsersDAL {
 
     public static Users getUsers(ResultSet rs) throws SQLException {
         Users user = new Users();
-        user.setUserId(rs.getInt("User_ID"));
-        user.setUserName(rs.getString("User_Name"));
-        user.setUserPass(rs.getString("User_Pass"));
-        user.setRole(rs.getString("User_Role"));
+        user.setUserId(rs.getInt("user_id"));
+        user.setUserName(rs.getString("user_name"));
+        user.setUserPass(rs.getString("user_pass"));
+        user.setUserphone(rs.getString("user_phone"));
+        user.setUseremail(rs.getString("user_email"));
+        user.setRole(rs.getString("user_role"));
+        user.setUserstatus(rs.getString("user_status"));
+
         return user;
     }
-
+    
     public String checklogin(String username, String userpass) throws SQLException {
         Statement stm = null;
         ResultSet rs = null;
-        String sql = "select * from users where User_Name ='" + username + "'";
+        String sql = "select * from users where user_name ='" + username + "'";
         String role = null;
+        String status=null;
         idus = -1;
         try (Connection con = DBUtil.getConnection();) {
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
 
             while (rs.next()) {
-                if (username.equals(rs.getString("User_Name"))) {
-                    idus = rs.getInt("User_ID");
+                if (username.equals(rs.getString("user_name"))) {
+                    idus = rs.getInt("user_id");
 
                 } else {
                     System.out.println("Wrong Account!!!");
@@ -63,20 +67,27 @@ public class UsersDAL {
             if (idus == -1) {
                 return null;
             } else {
-                rs = stm.executeQuery("SELECT * FROM users where User_ID ='" + idus + "' ");
+                rs = stm.executeQuery("SELECT * FROM users where user_id ='" + idus + "' ");
                 while (rs.next()) {
-                    if (userpass.equals(rs.getString("User_Pass"))) {
-                        rs = stm.executeQuery("SELECT * FROM users where User_ID = '" + idus + "'");
+                    if (userpass.equals(rs.getString("user_pass"))) {
+                        rs = stm.executeQuery("SELECT * FROM users where user_id = '" + idus + "'");
                         while (rs.next()) {
-                            // System.out.println("Valid Acc!");
-                            idus = rs.getInt("User_ID");
-                            role = rs.getString("User_Role");
+                            System.out.println("Valid Acc!");
+                            idus = rs.getInt("user_id");
+                            role = rs.getString("user_role");
+                            status = rs.getString("user_status");
                         }
                     } else {
                         System.out.println("Wrong Account!!!");
                     }
                 }
             }
+            if (status.trim().equals("inactive")) {
+                 role="";
+                 System.out.println("Account your inactive!\nEnter any key to continue...");
+                 Scanner sc = new Scanner(System.in);
+                 sc.nextLine();
+            } 
         } catch (SQLException e) {
             // TODO: handle exception
             e.printStackTrace();

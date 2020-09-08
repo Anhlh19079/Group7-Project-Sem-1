@@ -8,13 +8,11 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import dev.group7.app.persistance.Order;
 
 public class OrderDAL {
 
-    static Scanner sc = new Scanner(System.in);
     static UsersDAL udal = new UsersDAL();
 
     public List<Order> getAllOrders() {
