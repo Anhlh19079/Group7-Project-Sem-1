@@ -42,7 +42,7 @@ public class UserUI {
                    
                     if (Role == null) {
                         System.out.println("Account or password is incorrect, please re-enter");
-                        System.out.println("Enter to continue!");
+                        System.out.print("Enter to continue...");
                         sc.nextLine();
                     } else {
 

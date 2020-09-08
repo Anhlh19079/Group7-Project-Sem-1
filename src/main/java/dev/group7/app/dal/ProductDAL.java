@@ -78,7 +78,7 @@ public class ProductDAL {
         try (Connection con = DBUtil.getConnection();
                 PreparedStatement pstm = con.prepareStatement(
                         "update Products SET Pro_name =?, Unit_price = ?, Pro_amount = ?, Pro_status = ?, Pro_description = ? where Pro_id = ?;");) {
- 
+
             pstm.setString(1, product.getPro_name());
             pstm.setDouble(2, product.getUnitPrice());
             pstm.setInt(3, product.getAmount());

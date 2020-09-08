@@ -52,7 +52,7 @@ public class Menu {
                         System.out.println("+--------------------------------------+");
                         pui.showProduct();
                         pui.SearchProByName();
-                        System.out.println("Enter any key to continue : ");
+                        System.out.print("Enter any key to continue : ");
                         sc.nextLine();
                         break;
                     case "0":

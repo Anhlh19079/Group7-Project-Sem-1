@@ -42,13 +42,13 @@ public class UsersDAL {
 
         return user;
     }
-    
+
     public String checklogin(String username, String userpass) throws SQLException {
         Statement stm = null;
         ResultSet rs = null;
         String sql = "select * from users where user_name ='" + username + "'";
         String role = null;
-        String status=null;
+        String status = null;
         idus = -1;
         try (Connection con = DBUtil.getConnection();) {
             stm = con.createStatement();
@@ -83,11 +83,11 @@ public class UsersDAL {
                 }
             }
             if (status.trim().equals("inactive")) {
-                 role="";
-                 System.out.println("Account your inactive!\nEnter any key to continue...");
-                 Scanner sc = new Scanner(System.in);
-                 sc.nextLine();
-            } 
+                role = "";
+                System.out.println("Account your inactive!\nEnter any key to continue...");
+                Scanner sc = new Scanner(System.in);
+                sc.nextLine();
+            }
         } catch (SQLException e) {
             // TODO: handle exception
             e.printStackTrace();

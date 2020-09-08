@@ -186,7 +186,8 @@ public class OrderUI {
 
                     amount = Integer.parseInt(sc.nextLine());
                     if (amount > product.getAmount()) {
-                        System.out.printf("The store has only %d items left\nEnter any key...", product.getAmount());
+                        System.out.printf("The store has only %d items left", product.getAmount());
+                        System.out.print("Enter any key to continue...");
                         sc.nextLine();
                         break;
                     } else {

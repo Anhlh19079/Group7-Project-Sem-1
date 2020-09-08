@@ -58,7 +58,7 @@ public class MemberShip {
                     
                     pui.showProduct();
                     pui.SearchProByName();
-                    System.out.println("Enter any key to continue: ");
+                    System.out.print("Enter any key to continue: ");
                     sc.nextLine();
                     break;
 
@@ -71,7 +71,7 @@ public class MemberShip {
                     System.out.println("+--------------------------------------+");
                     pui.showProduct();
                     oui.CreateOrder();
-                    System.out.println("Enter any key to continue: ");
+                    System.out.print("Enter any key to continue: ");
                     sc.nextLine();
                     break;
 
@@ -83,7 +83,7 @@ public class MemberShip {
                     System.out.println("|          View History Order          |");
                     System.out.println("+--------------------------------------+");
                     oui.Manage_Order_Customer();
-                    System.out.println("Enter any key to continue: ");
+                    System.out.print("Enter any key to continue: ");
                     sc.nextLine();
                     break;
 
@@ -127,7 +127,7 @@ public class MemberShip {
                 case "3":
                     mt.cls();
                     uiu.showUsers();
-                    System.out.println("Enter any key to continue: ");
+                    System.out.print("Enter any key to continue: ");
                     sc.nextLine();
                     break;
                 case "0":
@@ -136,7 +136,7 @@ public class MemberShip {
                     break;
 
                 default:
-                    System.out.println("Enter incorrectly, re-enter: ");
+                    System.out.print("Enter incorrectly, re-enter: ");
                     sc.nextLine();
                     // break;
             }

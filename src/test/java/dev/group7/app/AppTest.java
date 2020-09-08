@@ -4,20 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import org.junit.Assume;
 import org.junit.Test;
 
 import dev.group7.app.bl.UsersBL;
-import dev.group7.app.dal.OrderDAL;
 import dev.group7.app.dal.UsersDAL;
-import dev.group7.app.persistance.Order;
-import dev.group7.app.persistance.Users;
-import dev.group7.app.ui.userui.UserUI;
 
 /**
  * Unit test for simple App.
@@ -28,7 +18,7 @@ public class AppTest {
     /**
      * Rigorous Test :-)
      */
-    
+
     static UsersBL ubl = new UsersBL();
 
     @Test
@@ -64,7 +54,7 @@ public class AppTest {
         try {
             String result = udal.checklogin("Anhlh", null);
             String expected = "";
-            assertTrue("Not Password", result==expected);
+            assertTrue("Not Password", result == expected);
         } catch (Exception e) {
 
         }
@@ -76,7 +66,7 @@ public class AppTest {
         try {
             final String result = udal.checklogin("Anhlh", "1010");
             String expected = "Admin";
-            assertTrue("valid",result.equals(expected));
+            assertTrue("valid", result.equals(expected));
         } catch (Exception e) {
         }
 
@@ -94,5 +84,4 @@ public class AppTest {
 
     }
 
-    
 }
