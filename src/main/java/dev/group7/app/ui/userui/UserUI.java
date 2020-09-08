@@ -28,7 +28,7 @@ public class UserUI {
                     while (w) {
                         System.out.print("Do you want to continue?(y/n): ");
                         String choice = mt.yesno();
-                        if (choice.equalsIgnoreCase("N")) {
+                        if (choice.equalsIgnoreCase("n")) {
                             w = false;
                             break;
                         } else if (choice.equalsIgnoreCase("Y")) {

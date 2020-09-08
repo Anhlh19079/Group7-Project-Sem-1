@@ -77,17 +77,19 @@ public class UsersDAL {
                             role = rs.getString("user_role");
                             status = rs.getString("user_status");
                         }
+                        if (status.trim().equals("inactive")) {
+                            role = "";
+                            System.out.println("Account your inactive!\nEnter any key to continue...");
+                            Scanner sc = new Scanner(System.in);
+                            sc.nextLine();
+                        }
                     } else {
                         System.out.println("Wrong Account!!!");
                     }
                 }
+
             }
-            if (status.trim().equals("inactive")) {
-                role = "";
-                System.out.println("Account your inactive!\nEnter any key to continue...");
-                Scanner sc = new Scanner(System.in);
-                sc.nextLine();
-            }
+
         } catch (SQLException e) {
             // TODO: handle exception
             e.printStackTrace();
