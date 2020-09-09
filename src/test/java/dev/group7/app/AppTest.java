@@ -7,13 +7,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import dev.group7.app.bl.UsersBL;
-import dev.group7.app.dal.UsersDAL;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
-    static UsersDAL udal = new UsersDAL();
 
     /**
      * Rigorous Test :-)
@@ -52,7 +50,7 @@ public class AppTest {
     public void checkLogin3() throws Exception {
 
         try {
-            String result = udal.checklogin("Anhlh", null);
+            String result = ubl.checkUserLogin("Anhlh", null);
             String expected = "";
             assertTrue("Not Password", result == expected);
         } catch (Exception e) {
@@ -64,7 +62,7 @@ public class AppTest {
     @Test
     public void checkLogin4() {
         try {
-            final String result = udal.checklogin("Anhlh", "1010");
+            final String result = ubl.checkUserLogin("Anhlh", "1010");
             String expected = "Admin";
             assertTrue("valid", result.equals(expected));
         } catch (Exception e) {
@@ -75,7 +73,7 @@ public class AppTest {
     @Test
     public void checkLogin5() {
         try {
-            final String result = udal.checklogin("Anhlh", "1234");
+            final String result = ubl.checkUserLogin("Anhlh", "1234");
             String expected = "Customer";
             assertFalse(result.equals(expected));
 
