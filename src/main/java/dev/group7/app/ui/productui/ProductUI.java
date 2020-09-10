@@ -17,7 +17,7 @@ public class ProductUI {
 
     public void SearchProByName() {
         try {
-            System.out.print("Nhap Pro_name:");
+            System.out.print("Enter Pro_name:");
             String name = sc.nextLine();
             List<Product> listpro = pbl.getByName(name);
             System.out.println("\nItem List: ");
@@ -69,7 +69,7 @@ public class ProductUI {
             } else {
                 System.out.println("Insert product failed!");
             }
-            System.out.println("Continue Insert?(y/n)");
+            System.out.print("Continue Insert?(y/n):");
             String choice1 = mt.yesno();
             if (choice1.equalsIgnoreCase("N")) {
                 break;
@@ -80,10 +80,10 @@ public class ProductUI {
     public static Product inputProduct() {
         Product product = new Product();
 
-        System.out.print("Pro_name: ");
+        System.out.print("Pro_name(enter to quit): ");
         product.setPro_name(sc.nextLine());
 
-        System.out.print("Unit Price: ");
+        System.out.print("Unit Price(enter to quit): ");
         Double gia = Double.parseDouble(sc.nextLine());
         product.setUnitPrice(gia);
 
@@ -106,7 +106,7 @@ public class ProductUI {
             Product product = new Product();
             List<Product> PR = new ArrayList<>();
 
-            System.out.print("Enter Product_id : ");
+            System.out.print("Enter Product_id (enter to quit): ");
             int id = Integer.parseInt(sc.nextLine());
             product.setPro_id(id);
 
@@ -138,7 +138,7 @@ public class ProductUI {
                     e.printStackTrace();
                 }
             } else {
-                System.out.println("Error occurred, cannot update!");
+                System.out.print("Error occurred, cannot update!");
             }
             System.out.print("Do you want to continue to update the product?(y/n): ");
             String x = mt.yesno();
@@ -163,7 +163,7 @@ public class ProductUI {
                 System.out.println("| 3.          ShowAllProduct           |");
                 System.out.println("| 0.               Exit                |");
                 System.out.println("+--------------------------------------+");
-                System.out.print("Nhap lua chon: ");
+                System.out.print("Enter your choice: ");
                 String choice = sc.nextLine();
                 switch (choice) {
                     case "1":
@@ -179,7 +179,6 @@ public class ProductUI {
                         break;
                     case "2":
                         mt.cls();
-
                         System.out.println("+======================================+");
                         System.out.println("|            PF10 - Group 7            |");
                         System.out.println("|      Welcome to Clothings Store      |");

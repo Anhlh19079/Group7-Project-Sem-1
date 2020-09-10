@@ -70,14 +70,14 @@ public class OrderUI {
 
             List<Order> LOD = new ArrayList<>();
 
-            System.out.print("Enter Order_id : ");
+            System.out.print("Enter Order_id(enter to quit) : ");
             int id = Integer.parseInt(sc.nextLine());
             order.setOrder_id(id);
 
             System.out.print("Enter Update Status : ");
             order.setStatus(sc.nextLine());
 
-            System.out.println("Do you want to update your order(y/n)?");
+            System.out.print("Do you want to update your order?(y/n): ");
             String choice = mt.yesno();
             if (choice.equalsIgnoreCase("y")) {
                 LOD.add(order);
@@ -90,7 +90,7 @@ public class OrderUI {
             } else {
                 System.out.println("Error occurred, cannot update!");
             }
-            System.out.print("Do you want to continue to update the Order?(y/n)");
+            System.out.print("Do you want to continue to update the Order(y/n): ");
             String x = mt.yesno();
             if (x.equalsIgnoreCase("n")) {
                 break;
@@ -168,7 +168,7 @@ public class OrderUI {
                 try {
                     id = Integer.parseInt(sc.nextLine());
                     if (!checkIdProduct(id)) {
-                        System.out.println("ID does not exist !\n Re-enter! ");
+                        System.out.print("ID does not exist !\n Re-enter! ");
                     } else {
                         product = getItem(id);
                         orderdetail.setPro_id(product.getPro_id());
