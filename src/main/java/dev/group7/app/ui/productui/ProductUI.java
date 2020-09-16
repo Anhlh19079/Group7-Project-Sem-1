@@ -123,7 +123,7 @@ public class ProductUI {
     }
 
     public void insertPro() {
-        mt.cls();
+        
         String choice = null;
         do {
 
