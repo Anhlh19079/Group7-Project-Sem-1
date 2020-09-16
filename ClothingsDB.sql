@@ -101,8 +101,141 @@ INSERT INTO `clothingsdb`.`users` (`user_name`, `user_pass`, `user_phone`, `user
 
 
 --
---
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('1', '1', 'Coat', 'single', '200000', '97', 'Hermes,LV,GUCCI...', 'con hang');
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('2', '1', 'T-Shirt', 'single', '150000', '98', 'T-shirt kieu dang moi...', 'con hang');
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('3', '3', 'Mu Gucci Original GG Canvas', 'single', '200000', '86', 'chat lieu vai Canvas,in hinh GG...', 'con hang');
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('4', '2', 'Giay Vans old skool', 'double', '189000', '97', 'vai cao cap,de cao su...', 'con hang');
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('5', '2', 'GIAY DOMBA NAM HIGH POIN', 'double', '980000', '49', 'kieu dang basi,co dien ,lich lam...', 'con hang');
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('6', '2', 'Ao khoac kaki jean nam', 'single', '156000', '100', 'Thiet ke noi bat ,phong cach...', 'con hang');
+INSERT INTO `clothingsdb`.`products` (`pro_id`, `cat_id`, `pro_name`, `pro_pack`, `unit_price`, `pro_amount`, `pro_description`, `pro_status`) VALUES ('7', '1', 'Ao Phong', 'single', '190000', '97', 'vai cotton , thoang mat...', 'con hang');
 
+--
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('1', 'm');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('2', 'l');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('3', 'xl');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('4', 'm');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('5', 'l');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('6', 'xl');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('7', 'l');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('8', 'xl');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('9', '36');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('10', '37');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('11', '38');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('12', '39');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('13', '40');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('14', '42');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('15', '38');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('16', '39');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('17', '40');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('18', '41');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('19', '42');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('20', 'l');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('21', 'm');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('22', 'xl');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('23', 'm');
+INSERT INTO `clothingsdb`.`sizes` (`size_id`, `size_name`) VALUES ('24', 'l');
+--
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('1', '1');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('1', '2');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('1', '3');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('2', '4');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('2', '5');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('2', '6');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('3', '7');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('3', '8');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('4', '9');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('4', '10');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('4', '11');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('4', '12');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('4', '13');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('4', '14');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('5', '15');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('5', '16');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('5', '17');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('5', '18');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('5', '19');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('6', '20');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('6', '21');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('6', '22');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('7', '23');
+INSERT INTO `clothingsdb`.`product_sizes` (`pro_id`, `size_id`) VALUES ('7', '24');
+--
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('1', 'Grey');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('2', 'Black');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('3', 'white');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('4', 'white');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('5', 'grey');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('6', 'black');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('7', 'black');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('8', 'black');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('9', 'white');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('10', 'orange');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('11', 'pink');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('12', 'brown');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('13', 'yellow');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('14', 'green moss');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('15', 'black');
+INSERT INTO `clothingsdb`.`colors` (`col_id`, `col_name`) VALUES ('16', 'white');
+
+--
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('1', '1');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('1', '2');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('2', '3');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('2', '4');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('2', '5');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('3', '6');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('4', '7');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('5', '8');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('5', '9');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('6', '10');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('6', '11');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('6', '12');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('6', '13');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('6', '14');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('6', '15');
+INSERT INTO `clothingsdb`.`product_colors` (`pro_id`, `col_id`) VALUES ('7', '16');
+--
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('1', 'qqqqqqqqqqqqqqqqqqqhuiddce');
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('2', 'dvuecedwucevbaeucgberudcvv');
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('3', 'hazdaddddddddddd');
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('4', 'rtbvrbrrfrgtyuxxqwdwefrrfef');
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('5', 'asfggtgfdcdfvbfv');
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('6', 'efthyuujujnuyhbtggvgrtnyyu');
+INSERT INTO `clothingsdb`.`images` (`ima_id`, `ima_url`) VALUES ('7', 'fvgtyhtfdsasfdghnhyttredvf');
+--
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('1', '1');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('1', '2');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('2', '3');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('3', '3');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('4', '4');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('5', '5');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('6', '6');
+INSERT INTO `clothingsdb`.`product_images` (`pro_id`, `ima_id`) VALUES ('7', '7');
+
+--
+INSERT INTO `clothingsdb`.`orders` (`order_id`, `user_id`, `order_date`, `order_totalPrice`, `order_status`) VALUES ('1', '3', '16/9/2020', '928000', 'pending');
+INSERT INTO `clothingsdb`.`orders` (`order_id`, `user_id`, `order_date`, `order_totalPrice`, `order_status`) VALUES ('2', '3', '16/9/2020', '200000', 'pending');
+INSERT INTO `clothingsdb`.`orders` (`order_id`, `user_id`, `order_date`, `order_totalPrice`, `order_status`) VALUES ('3', '3', '16/9/2020', '200000', 'pending');
+INSERT INTO `clothingsdb`.`orders` (`order_id`, `user_id`, `order_date`, `order_totalPrice`, `order_status`) VALUES ('4', '4', '16/9/2020', '1130000', 'pending');
+INSERT INTO `clothingsdb`.`orders` (`order_id`, `user_id`, `order_date`, `order_totalPrice`, `order_status`) VALUES ('5', '4', '16/9/2020', '589000', 'pending');
+INSERT INTO `clothingsdb`.`orders` (`order_id`, `user_id`, `order_date`, `order_totalPrice`, `order_status`) VALUES ('6', '3', '16/9/2020', '580000', 'pending');
+
+--
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('1', '1', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('1', '2', '150000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('1', '3', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('1', '4', '189000', '2');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('2', '1', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('3', '3', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('4', '2', '150000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('4', '5', '980000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('5', '1', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('5', '3', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('5', '4', '189000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('6', '3', '200000', '1');
+INSERT INTO `clothingsdb`.`orderdetails` (`order_id`, `pro_id`, `unit_price`, `quantity`) VALUES ('6', '7', '190000', '2');
+
+--
 select * from Products where Pro_name like  '%Ao%';
 
 -- 
@@ -130,7 +263,7 @@ BEGIN
 END; $$
 DELIMITER ;
 drop procedure showorderbid;
-call showorderbid(2);
+call showorderbid(1);
 --
 select od.Order_id,u.User_ID ,p.Pro_id, o.Order_totalPrice , od.Quantity 
 from users as u inner join orders as o on u.User_ID=o.User_ID inner join 
@@ -144,3 +277,4 @@ limit 1;
 select order_id 
 from orders o inner join users u on o.user_id=u.user_id
 where u.user_id = 3; 
+select order_id from orders o inner join users u on o.user_id=u.user_id where u.user_id =3;
