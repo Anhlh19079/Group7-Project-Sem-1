@@ -496,7 +496,6 @@ public class OrderUI {
                         System.out.print("You entered incorrectly, please re-enter!\nPress any key...");
                 }
             } catch (Exception e) {
-                // TODO: handle exception
             }
         }
     }
