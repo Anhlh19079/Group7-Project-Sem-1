@@ -17,25 +17,27 @@ public class ProductUI {
 
     public void SearchProByName() {
         try {
-            System.out.print("Enter Pro_name:");
+            System.out.print("Enter Pro_name to search:");
             String name = sc.nextLine();
             List<Product> listpro = pbl.getByName(name);
             System.out.println("\nItem List: ");
+            System.out.println("[Category ID : 1-clothings ; 2-shoes ; 3-hats]");
+
             System.out.println(
-                    "+-----------------------------------------------------------------------------------------------------------------------------------+");
-            System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", "ID", "Product Name", "Pack",
+                    "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf("| %-5s | %-11s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", "ID", "Category ID","Product Name", "Pack",
                     "Unit Price", "Amount", "Description", "Status");
             System.out.println(
-                    "+-----------------------------------------------------------------------------------------------------------------------------------+");
-            if (listpro.isEmpty())
+                "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
+                if (listpro.isEmpty())
                 System.out.println("The list is empty!");
             for (Product p : listpro) {
-                System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", p.getPro_id(),
+                System.out.printf("| %-5s | %-11s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", p.getPro_id(),p.getCategory_ID(),
                         p.getPro_name(), p.getpro_pack(), p.getUnitPrice() + " VND", p.getAmount(), p.getDescription(),
                         p.getPro_status());
             }
             System.out.println(
-                    "+-----------------------------------------------------------------------------------------------------------------------------------+");
+                "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -45,20 +47,22 @@ public class ProductUI {
     public void showProduct() {
         List<Product> lst = pbl.getAllPro();
         System.out.println("\nItem List: ");
+        System.out.println("[Category ID : 1-clothings ; 2-shoes ; 3-hats]");
         System.out.println(
-                "+-----------------------------------------------------------------------------------------------------------------------------------+");
-        System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", "ID", "Product Name", "Pack","Unit Price", "Amount", "Description", "Status");
+            "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf("| %-5s | %-11s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", "ID", "Category ID","Product Name", "Pack",
+                "Unit Price", "Amount", "Description", "Status");
         System.out.println(
-                "+-----------------------------------------------------------------------------------------------------------------------------------+");
-        if (lst.isEmpty())
+            "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
+            if (lst.isEmpty())
             System.out.println("The list is empty!");
         for (Product p : lst) {
-            System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", p.getPro_id(),
+            System.out.printf("| %-5s | %-11s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", p.getPro_id(),p.getCategory_ID(),
                     p.getPro_name(), p.getpro_pack(), p.getUnitPrice() + " VND", p.getAmount(), p.getDescription(),
                     p.getPro_status());
         }
         System.out.println(
-                "+-----------------------------------------------------------------------------------------------------------------------------------+");
+            "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
 
     }
     // ==============================================================================================================
@@ -326,8 +330,15 @@ public class ProductUI {
             int id = Integer.parseInt(sc.nextLine());
             product.setPro_id(id);
 
+            System.out.print("Update category: ");
+            int cat = Integer.parseInt(sc.nextLine());
+            product.setCategory_ID(cat);
+
             System.out.print("Update Pro_name: ");
             product.setPro_name(sc.nextLine());
+
+            System.out.print("Update Pack-style: ");
+            product.setpro_pack(sc.nextLine());
 
             System.out.print("Update Unit_price: ");
             double price = Double.parseDouble(sc.nextLine());
@@ -395,14 +406,27 @@ public class ProductUI {
                         break;
                     case "2":
                         mt.cls();
+                        pui.showProduct();
                         System.out.println("+======================================+");
                         System.out.println("|            PF10 - Group 7            |");
                         System.out.println("|      Welcome to Clothings Store      |");
                         System.out.println("+--------------------------------------+");
                         System.out.println("|            Update Product            |");
                         System.out.println("+--------------------------------------+");
-                        pui.showProduct();
-                        pui.inputInfoUpdate();
+                        System.out.print("Do you want update items?\n'y'.Update items\n'n'.Exits\n");
+                        while (true) {
+                            System.out.print("Enter you choice(y/n): ");
+                            String ch = sc.nextLine();
+                            if (ch.equalsIgnoreCase("y")) {
+                                pui.inputInfoUpdate();
+
+                                break;
+                            } else if (ch.equalsIgnoreCase("n")) {
+                                break;
+                            } else {
+                                System.out.println("Only y or n!Re-enter...");
+                            }
+                        }
                         break;
                     case "0":
                         System.out.println("Exit!!!");

@@ -44,47 +44,49 @@ public class ProductDAL {
         }
         return litspro;
     }
-//INSERTPRODUCT OLD
-//     public int insertProduct(Product product) {
-//         try (Connection con = DBUtil.getConnection();
-//                 PreparedStatement pstm = con.prepareStatement(
-//                         "insert into Products(Pro_name, Unit_price, Pro_amount, Pro_status, Pro_description) values (?,?,?,?,?)");) {
-//             pstm.setString(1, product.getPro_name());
-//             pstm.setDouble(2, product.getUnitPrice());
-//             pstm.setInt(3, product.getAmount());
-//             pstm.setString(4, product.getPro_status());
-//             pstm.setString(5, product.getDescription());
-//             return pstm.executeUpdate();
-//         } catch (SQLException ex) {
-//             System.out.println("insert fail!");
-//             System.out.println(ex.toString());
-//             return 0;
+    // INSERTPRODUCT OLD
+    // public int insertProduct(Product product) {
+    // try (Connection con = DBUtil.getConnection();
+    // PreparedStatement pstm = con.prepareStatement(
+    // "insert into Products(Pro_name, Unit_price, Pro_amount, Pro_status,
+    // Pro_description) values (?,?,?,?,?)");) {
+    // pstm.setString(1, product.getPro_name());
+    // pstm.setDouble(2, product.getUnitPrice());
+    // pstm.setInt(3, product.getAmount());
+    // pstm.setString(4, product.getPro_status());
+    // pstm.setString(5, product.getDescription());
+    // return pstm.executeUpdate();
+    // } catch (SQLException ex) {
+    // System.out.println("insert fail!");
+    // System.out.println(ex.toString());
+    // return 0;
 
-//         }
-//     }
-// //GETPRODUCT OLD
-//     // public Product getProduct(ResultSet rs) throws SQLException {
-//     //     Product product = new Product();
-//     //     product.setPro_id(rs.getInt("Pro_id"));
-//     //     product.setPro_name(rs.getString("Pro_name"));
-//     //     product.setUnitPrice(rs.getDouble("Unit_price"));
-//     //     product.setAmount(rs.getInt("Pro_amount"));
-//     //     product.setPro_status(rs.getString("Pro_status"));
-//     //     product.setDescription(rs.getString("Pro_description"));
-//     //     return product;
-//     // }
+    // }
+    // }
+    // //GETPRODUCT OLD
+    // // public Product getProduct(ResultSet rs) throws SQLException {
+    // // Product product = new Product();
+    // // product.setPro_id(rs.getInt("Pro_id"));
+    // // product.setPro_name(rs.getString("Pro_name"));
+    // // product.setUnitPrice(rs.getDouble("Unit_price"));
+    // // product.setAmount(rs.getInt("Pro_amount"));
+    // // product.setPro_status(rs.getString("Pro_status"));
+    // // product.setDescription(rs.getString("Pro_description"));
+    // // return product;
+    // // }
 
     public int update(Product product) throws SQLException {
         try (Connection con = DBUtil.getConnection();
                 PreparedStatement pstm = con.prepareStatement(
-                        "update Products SET Pro_name =?, Unit_price = ?, Pro_amount = ?, Pro_status = ?, Pro_description = ? where Pro_id = ?;");) {
-
-            pstm.setString(1, product.getPro_name());
-            pstm.setDouble(2, product.getUnitPrice());
-            pstm.setInt(3, product.getAmount());
-            pstm.setString(4, product.getPro_status());
-            pstm.setString(5, product.getDescription());
-            pstm.setInt(6, product.getPro_id());
+                        "update Products SET cat_id =?,Pro_name =?,pro_pack=?, Unit_price = ?, Pro_amount = ?, Pro_description = ?, Pro_status = ? where Pro_id = ?;");) {
+            pstm.setInt(1, product.getCategory_ID());
+            pstm.setString(2, product.getPro_name());
+            pstm.setString(3, product.getpro_pack());
+            pstm.setDouble(4, product.getUnitPrice());
+            pstm.setInt(5, product.getAmount());  
+            pstm.setString(6, product.getDescription());
+            pstm.setString(7, product.getPro_status());
+            pstm.setInt(8, product.getPro_id());
             int rs = pstm.executeUpdate();
             if (rs == 1) {
                 // System.out.println("Update Successful!");
@@ -99,7 +101,7 @@ public class ProductDAL {
         }
     }
 
-    //===============================================================================
+    // ===============================================================================
     public Product getProduct(ResultSet rs) throws SQLException {
         Product product = new Product();
         product.setPro_id(rs.getInt("pro_id"));
@@ -112,6 +114,7 @@ public class ProductDAL {
         product.setPro_status(rs.getString("pro_status"));
         return product;
     }
+
     public List<Product> getcat_id() {
         List<Product> lbid = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
@@ -126,11 +129,13 @@ public class ProductDAL {
         }
         return lbid;
     }
+
     public Product getidcategories(ResultSet rs) throws SQLException {
         Product catid = new Product();
         catid.setCategory_ID(rs.getInt("cat_id"));
         return catid;
     }
+
     public int reProId() {
         int proid = 0;
         try (Connection con = DBUtil.getConnection();
