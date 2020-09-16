@@ -12,10 +12,6 @@ public class ProductBL {
         return productDAL.getAll();
     }
 
-    // public boolean addProduct(Product product) {
-    //     return productDAL.insertProduct(product) > 0;
-    // }
-
     public int UpdatePro(Product product) throws SQLException {
         return productDAL.update(product);
     }
@@ -24,11 +20,11 @@ public class ProductBL {
         return productDAL.getProductByName(name);
     }
 
-
-    //==
+    // ==
     public boolean addProduct(Product product) {
         return productDAL.insertProduct(product);
     }
+
     public boolean insertpsize(int id) {
         return productDAL.insert_product_size(id);
     }
@@ -53,10 +49,11 @@ public class ProductBL {
         return productDAL.insert_ima_url(url);
     }
 
-    public int reproductid(){
+    public int reproductid() {
         return productDAL.reProId();
     }
-    public List<Product> getcategories(){
+
+    public List<Product> getcategories() {
         return productDAL.getcat_id();
     }
 }

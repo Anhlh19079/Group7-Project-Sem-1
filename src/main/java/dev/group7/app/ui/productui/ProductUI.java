@@ -65,44 +65,7 @@ public class ProductUI {
             "+-------------------------------------------------------------------------------------------------------------------------------------------------+");
 
     }
-    // ==============================================================================================================
-    // public void insertPro() {
-    // while (true) {
-    // ProductBL proBL = new ProductBL();
-    // if (proBL.addProduct(inputProduct())) {
-    // System.out.println("Insert product complete!");
-    // } else {
-    // System.out.println("Insert product failed!");
-    // }
-    // System.out.print("Continue Insert?(y/n):");
-    // String choice1 = mt.yesno();
-    // if (choice1.equalsIgnoreCase("N")) {
-    // break;
-    // }
-    // }
-    // }
-
-    // public static Product inputProduct() {
-    // Product product = new Product();
-
-    // System.out.print("Pro_name(enter to quit): ");
-    // product.setPro_name(sc.nextLine());
-
-    // System.out.print("Unit Price(enter to quit): ");
-    // Double gia = Double.parseDouble(sc.nextLine());
-    // product.setUnitPrice(gia);
-
-    // System.out.print("Amount: ");
-    // int sl = Integer.parseInt(sc.nextLine());
-    // product.setAmount(sl);
-
-    // System.out.print("Description: ");
-    // product.setDescription(sc.nextLine());
-
-    // System.out.print("Pro_status: ");
-    // product.setPro_status(sc.nextLine());
-    // return product;
-    // }
+    
     public static boolean getcat(int id) {
         List<Product> cat = pbl.getcategories();
         for (Product product : cat) {
