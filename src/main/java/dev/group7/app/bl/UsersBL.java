@@ -17,4 +17,7 @@ public class UsersBL {
         return udal.checklogin(username, userpass);
     }
 
+    public List<Users> getInfoCus(int id){
+        return udal.getInforInvoice(id);
+    }
 }

@@ -31,7 +31,7 @@ public class ProductUI {
                 System.out.println("The list is empty!");
             for (Product p : listpro) {
                 System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", p.getPro_id(),
-                        p.getPro_name(), p.getUnitPrice(), p.getAmount(), p.getPro_status(), p.getDescription());
+                        p.getPro_name(), p.getUnitPrice()+" VND", p.getAmount(), p.getPro_status(), p.getDescription());
             }
             System.out.println(
                     "+-------------------------------------------------------------------------------------------------------------------------------+");
@@ -54,51 +54,252 @@ public class ProductUI {
             System.out.println("The list is empty!");
         for (Product p : lst) {
             System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", p.getPro_id(), p.getPro_name(),
-                    p.getUnitPrice(), p.getAmount(), p.getPro_status(), p.getDescription());
+                    p.getUnitPrice()+" VND", p.getAmount(), p.getPro_status(), p.getDescription());
         }
         System.out.println(
                 "+-------------------------------------------------------------------------------------------------------------------------------+");
 
     }
+    // ==============================================================================================================
+    // public void insertPro() {
+    // while (true) {
+    // ProductBL proBL = new ProductBL();
+    // if (proBL.addProduct(inputProduct())) {
+    // System.out.println("Insert product complete!");
+    // } else {
+    // System.out.println("Insert product failed!");
+    // }
+    // System.out.print("Continue Insert?(y/n):");
+    // String choice1 = mt.yesno();
+    // if (choice1.equalsIgnoreCase("N")) {
+    // break;
+    // }
+    // }
+    // }
 
-    public void insertPro() {
-        while (true) {
-            ProductBL proBL = new ProductBL();
-            if (proBL.addProduct(inputProduct())) {
-                System.out.println("Insert product complete!");
-            } else {
-                System.out.println("Insert product failed!");
-            }
-            System.out.print("Continue Insert?(y/n):");
-            String choice1 = mt.yesno();
-            if (choice1.equalsIgnoreCase("N")) {
-                break;
+    // public static Product inputProduct() {
+    // Product product = new Product();
+
+    // System.out.print("Pro_name(enter to quit): ");
+    // product.setPro_name(sc.nextLine());
+
+    // System.out.print("Unit Price(enter to quit): ");
+    // Double gia = Double.parseDouble(sc.nextLine());
+    // product.setUnitPrice(gia);
+
+    // System.out.print("Amount: ");
+    // int sl = Integer.parseInt(sc.nextLine());
+    // product.setAmount(sl);
+
+    // System.out.print("Description: ");
+    // product.setDescription(sc.nextLine());
+
+    // System.out.print("Pro_status: ");
+    // product.setPro_status(sc.nextLine());
+    // return product;
+    // }
+    public static boolean getcat(int id) {
+        List<Product> cat = pbl.getcategories();
+        for (Product product : cat) {
+            if (product.getCategory_ID() == id) {
+                return true;
             }
         }
+        return false;
     }
 
     public static Product inputProduct() {
         Product product = new Product();
+        try {
+            while (true) {
+                System.out.print("Cat_id[1-3]: ");
+                try {
+                    int catid = Integer.parseInt(sc.nextLine());
+                    if (getcat(catid)) {
+                        product.setCategory_ID(catid);
+                        break;
+                    } else {
+                        System.out.print("Re-enter[1-3]!\n");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println(e.toString());
+                }
 
-        System.out.print("Pro_name(enter to quit): ");
-        product.setPro_name(sc.nextLine());
+            }
 
-        System.out.print("Unit Price(enter to quit): ");
-        Double gia = Double.parseDouble(sc.nextLine());
-        product.setUnitPrice(gia);
+            System.out.print("Pro_name(enter to quit): ");
+            product.setPro_name(sc.nextLine());
 
-        System.out.print("Amount: ");
-        int sl = Integer.parseInt(sc.nextLine());
-        product.setAmount(sl);
+            System.out.print("Pack: ");
+            product.setpro_pack(sc.nextLine());
 
-        System.out.print("Description: ");
-        product.setDescription(sc.nextLine());
+            System.out.print("Unit Price(enter to quit): ");
+            Double gia = Double.parseDouble(sc.nextLine());
+            product.setUnitPrice(gia);
 
-        System.out.print("Pro_status: ");
-        product.setPro_status(sc.nextLine());
+            System.out.print("Amount: ");
+            int sl = Integer.parseInt(sc.nextLine());
+            product.setAmount(sl);
+
+            System.out.print("Description: ");
+            product.setDescription(sc.nextLine());
+
+            System.out.print("Pro_status: ");
+            product.setPro_status(sc.nextLine());
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
         return product;
     }
 
+    public void insertPro() {
+        mt.cls();
+        String choice = null;
+        do {
+
+            Product productdt = inputProduct();
+
+            boolean result = pbl.addProduct(productdt);
+            System.out.print("Do you want add size,color,image-url for product?(y/n): ");
+            String yorn = mt.yesno();
+            if (yorn.equalsIgnoreCase("y")) {
+
+                themproduct_sizesandsizes();
+
+                System.out.print("Add colors?(y/n): ");
+                String c = mt.yesno();
+                if (c.equalsIgnoreCase("y")) {
+                    themproduct_colorandcolor();
+
+                }
+                System.out.print("Add image-url?(y/n): ");
+                String i = mt.yesno();
+                if (i.equalsIgnoreCase("y")) {
+                    themproduct_imaandima();
+                }
+            } else {
+                if (result) {
+                    System.out.println("Insert product Successful!!!>");
+
+                } else {
+                    System.out.println("Create Order Fail!!!>");
+                }
+            }
+            if (result) {
+                System.out.println("Insert product Successful!!!>");
+
+            } else {
+                System.out.println("Create Order Fail!!!>");
+            }
+            System.out.print("Do you want continue insert?(y/n): ");
+            try {
+                choice = mt.yesno();
+                if (choice.equalsIgnoreCase("n")) {
+                    break;
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+
+        } while (choice.equalsIgnoreCase("y"));
+    }
+
+    // ===========add==============
+    static int productid = pbl.reproductid();
+
+    public static void themproduct_sizesandsizes() {
+        String key = null;
+        do {
+
+            System.out.print("enter size: ");
+            String sizename = sc.nextLine();
+            pbl.insertsize(sizename);
+            pbl.insertpsize(productid);
+            boolean w = true;
+            while (w) {
+                System.out.print("Continue add size?: ");
+                try {
+                    key = mt.yesno();
+                    if (key.equalsIgnoreCase("n")) {
+                        break;
+                    } else if (key.equalsIgnoreCase("y")) {
+                        w = false;
+                        break;
+                    } else {
+                        System.out.println("Only y or n ,re-enter!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } while (key.equalsIgnoreCase("y"));
+    }
+
+    // -------------
+    public static void themproduct_colorandcolor() {
+        String key = null;
+        do {
+
+            System.out.print("enter color: ");
+            String colorname = sc.nextLine();
+            pbl.insertcolor(colorname);
+            pbl.insertpcolor(productid);
+            boolean w = true;
+            while (w) {
+                System.out.print("Continue add color?: ");
+                try {
+                    key = mt.yesno();
+                    if (key.equalsIgnoreCase("n")) {
+                        break;
+                    } else if (key.equalsIgnoreCase("y")) {
+                        w = false;
+                        break;
+                    } else {
+                        System.out.println("Only y or n ,re-enter!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } while (key.equalsIgnoreCase("y"));
+    }
+
+    // --------------
+    public static void themproduct_imaandima() {
+
+        String key = null;
+        do {
+
+            System.out.print("enter image-url: ");
+            String imaurl = sc.nextLine();
+            pbl.insertimage(imaurl);
+            pbl.insertpimage(productid);
+            boolean w = true;
+            while (w) {
+                System.out.print("Continue add url?: ");
+                try {
+                    key = mt.yesno();
+                    if (key.equalsIgnoreCase("n")) {
+                        break;
+                    } else if (key.equalsIgnoreCase("y")) {
+                        w = false;
+                        break;
+                    } else {
+                        System.out.println("Only y or n ,re-enter!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } while (key.equalsIgnoreCase("y"));
+    }
+
+    // ===================================================================================================================
     public void inputInfoUpdate() {
 
         while (true) {
@@ -163,7 +364,7 @@ public class ProductUI {
                 System.out.println("| 3.          ShowAllProduct           |");
                 System.out.println("| 0.               Exit                |");
                 System.out.println("+--------------------------------------+");
-                System.out.print("Enter your choice: ");
+                System.out.print("Enter your choice[1 , 2 , 3 or 0]: ");
                 String choice = sc.nextLine();
                 switch (choice) {
                     case "1":
@@ -201,6 +402,18 @@ public class ProductUI {
                         System.out.println("|             View Product             |");
                         System.out.println("+--------------------------------------+");
                         pui.showProduct();
+                        while (true) {
+                            System.out.print("Do you want search product?(y/n): ");
+                            String ch = sc.nextLine();
+                            if (ch.equalsIgnoreCase("y")) {
+                                pui.SearchProByName();
+                                break;
+                            } else if (ch.equalsIgnoreCase("n")) {
+                                break;
+                            } else {
+                                System.out.println("Only y or n,re-enter!");
+                            }
+                        }
                         System.out.print("Enter any key to continue...");
                         sc.nextLine();
                         break;
@@ -214,4 +427,5 @@ public class ProductUI {
             }
         }
     }
+
 }

@@ -64,13 +64,26 @@ public class MemberShip {
 
                 case "2":
                     mt.cls();
+                    
+                    pui.showProduct();
                     System.out.println("+======================================+");
                     System.out.println("|            PF10 - Group 7            |");
                     System.out.println("|      Welcome to Clothings Store      |");
                     System.out.println("|              Buy item                |");
                     System.out.println("+--------------------------------------+");
-                    pui.showProduct();
-                    oui.CreateOrder();
+                    System.out.print("Do you want buy items?\n'y'.Buy items\n'n'.Exits\n");
+                    while (true) {
+                         System.out.print("Enter you choice(y/n): ");
+                        String ch = sc.nextLine();
+                        if (ch.equalsIgnoreCase("y")) {
+                            oui.CreateOrder();
+                            break;
+                        } else if (ch.equalsIgnoreCase("n")) {
+                            break;
+                        }else{
+                            System.out.println("Only y or n!Re-enter...");
+                        }
+                    }
                     System.out.print("Enter any key to continue: ");
                     sc.nextLine();
                     break;

@@ -8,6 +8,7 @@ public class Order {
     private int user_id;
     public Calendar c;
     private Users user;
+    private Product product;
     private String order_date;
     private double total_price;
     private String status;
@@ -71,6 +72,13 @@ public class Order {
         this.user = user;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+    public void setProduct(Product product) {
+        this.product=product;
+    }
+
     public Users getUsers() {
         return user;
     }
@@ -97,5 +105,8 @@ public class Order {
 
     public int getQuantity() {
         return quantity;
+    }
+    public String toString(){
+        return "|Order id:"+order_id +"-"+ user_id +"-Pro id"+ pro_id+"-Quantity:"+quantity+"|";
     }
 }

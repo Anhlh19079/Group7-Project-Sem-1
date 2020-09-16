@@ -12,15 +12,58 @@ user_role varchar(255) not null,
 user_status varchar(100) not null
 );
 
+create table Categories(
+cat_id int auto_increment primary key not null,
+cat_name varchar(255)
+); 
 create table Products(
 	pro_id int auto_increment primary key not null,
+    cat_id int,
     pro_name varchar(200) not null,
+    pro_pack varchar(255),
     unit_price double(15,2) default 0,
     pro_amount int not null default 0,
     pro_description varchar(255),
-    pro_status varchar(255) not null
+    pro_status varchar(255) not null,
+    constraint fk_Products_Categories foreign key(cat_id) references Categories(cat_id)
+
 );
 
+create table Colors(
+col_id int auto_increment primary key not null,
+col_name varchar(255)
+);
+create table Product_colors(
+pro_id int,
+col_id int,
+constraint pk_Product_colors primary key(pro_id,col_id),
+constraint fk_Product_colors_Colors foreign key(col_id) references Colors(col_id),
+constraint fk_Product_colors_Products foreign key(pro_id) references Products(pro_id)
+);
+
+create table Sizes(
+size_id int auto_increment primary key not null,
+size_name varchar(255)
+);
+create table Product_sizes(
+pro_id int,
+size_id int ,
+constraint pk_Product_sizes primary key(pro_id,size_id),
+constraint fk_Product_sizes_Sizes foreign key(size_id) references Sizes(size_id),
+constraint fk_Product_sizes_Products foreign key(pro_id) references Products(pro_id)
+);
+
+create table Images(
+ima_id int auto_increment primary key not null,
+ima_url varchar(255)
+);
+create table Product_images(
+pro_id int,
+ima_id int,
+constraint pk_Product_images primary key(pro_id,ima_id),
+constraint fk_Product_images_Images foreign key(ima_id) references Images(ima_id),
+constraint fk_Product_images_Products foreign key(pro_id) references Products(pro_id)
+);
 create table Orders(
 	order_id int auto_increment primary key not null,
     user_id int ,
@@ -35,6 +78,7 @@ create table OrderDetails(
     pro_id int ,
     unit_price double(15,2) not null,
     quantity int not null default 1,
+    
     constraint pk_OrderDetails primary key(order_id, pro_id),
     constraint fk_OrderDetails_Orders foreign key(order_id) references Orders(order_id),
     constraint fk_OrderDetails_Products foreign key(pro_id) references Products(pro_id)
@@ -42,7 +86,13 @@ create table OrderDetails(
 select User_role, User_Name
 from users
 where User_pass like "test1";
+INSERT INTO `clothingsdb`.`categories` (`cat_name`) VALUES ('Clothings');
+INSERT INTO `clothingsdb`.`categories` (`cat_name`) VALUES ('Shoes');
+INSERT INTO `clothingsdb`.`categories` (`cat_name`) VALUES ('Hats');
+
+
 --
+
 INSERT INTO `clothingsdb`.`users` (`user_name`, `user_pass`, `user_phone`, `user_email`, `user_role`,`user_status`) VALUES ('Anhlh', '1010', '0974252893', 'haianh@gmail.com', 'Admin','active');
 INSERT INTO `clothingsdb`.`users` (`user_name`, `user_pass`, `user_phone`, `user_email`, `user_role`,`user_status`) VALUES ('Thongnm', '1234', '0165982370', 'thongnm@gmail.com', 'Admin','active');
 INSERT INTO `clothingsdb`.`users` (`user_name`, `user_pass`, `user_phone`, `user_email`, `user_role`,`user_status`) VALUES ('tester', '1111', '0329876142', 'test@gmail.com', 'Customer','active');
@@ -56,18 +106,7 @@ INSERT INTO `clothingsdb`.`users` (`user_name`, `user_pass`, `user_phone`, `user
 select * from Products where Pro_name like  '%Ao%';
 
 -- 
-INSERT INTO `clothingsdb`.`products` (`Pro_name`, `Unit_price`, `Pro_amount`, `Pro_status`, `Pro_description`) VALUES ('ao dai', '400000', '30', '1', 'trang,den,vang,do');
-INSERT INTO `clothingsdb`.`products` (`Pro_name`, `Unit_price`, `Pro_amount`, `Pro_status`, `Pro_description`) VALUES ('ao khoac long', '1000000', '11', '1', 'dep,giu am tot');
-INSERT INTO `clothingsdb`.`products` (`Pro_name`, `Unit_price`, `Pro_amount`, `Pro_status`, `Pro_description`) VALUES ('Quan Jeans', '250000', '100', '1', 'unisex,olor dark(blue,black)');
-INSERT INTO `clothingsdb`.`products` (`Pro_name`, `Unit_price`, `Pro_amount`, `Pro_status`, `Pro_description`) VALUES ('T-Shirt', '100000', '50', '1', 'nam ,nu,type:all');
-INSERT INTO `clothingsdb`.`products` (`Pro_name`, `Unit_price`, `Pro_amount`, `Pro_status`, `Pro_description`) VALUES ('Ao phong', '80000', '40', '1', 'tay dai ,ngan,5 mau ');
-INSERT INTO `clothingsdb`.`products` (`Pro_name`, `Unit_price`, `Pro_amount`, `Pro_status`, `Pro_description`) VALUES ('quan den', '200000', '10', '1', '...');
 
-select u.user_id , u.user_name, o.order_id,o.order_date
-from users as u inner join orders as o on u.user_id=o.user_id;
-select * from orders where user_id like '1';
-select user_id from users where user_name like 'Anhlh' and user_pass like '1234';
-drop procedure showorder;
 
 DELIMITER $$
 CREATE PROCEDURE showorder()
@@ -79,9 +118,29 @@ END; $$
 DELIMITER ;
 call showorder;
 select * from orders where orders.User_id='3';
-
+--
+DELIMITER $$
+CREATE PROCEDURE showorderbid(IN orderid int)
+BEGIN
+   select u.user_name,u.user_phone,u.user_email,p.pro_name,p.unit_price,od.quantity,(p.unit_price*od.quantity)total, o.order_totalPrice
+   from users as u inner join orders as o on u.user_id=o.user_id 
+   inner join orderdetails as od on o.order_id=od.order_id 
+   inner join products as p on od.pro_id=p.pro_id
+   where o.order_id = orderid and od.order_id=orderid;
+END; $$
+DELIMITER ;
+drop procedure showorderbid;
+call showorderbid(2);
+--
 select od.Order_id,u.User_ID ,p.Pro_id, o.Order_totalPrice , od.Quantity 
 from users as u inner join orders as o on u.User_ID=o.User_ID inner join 
 orderdetails as od on o.Order_id = od.Order_id inner join 
 products as p on od.Pro_id = p.Pro_id
 where u.User_ID = 3;
+select u.user_name,u.user_phone,u.user_email,o.order_status
+from users u inner join orders o on u.user_id=o.user_id
+where o.order_id=1 
+limit 1;
+select order_id 
+from orders o inner join users u on o.user_id=u.user_id
+where u.user_id = 3; 

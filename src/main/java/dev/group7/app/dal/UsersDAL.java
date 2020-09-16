@@ -1,6 +1,7 @@
 package dev.group7.app.dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -98,6 +99,33 @@ public class UsersDAL {
         return role;
     }
 
+    public List<Users> getInforInvoice(int id) {
+        List<Users> listusCus = new ArrayList<>();
+        try {
+            String sql = "select u.user_name,u.user_phone,u.user_email from users as u inner join orders as o on u.user_id=o.user_id where o.order_id="+id;
+            Connection con = DBUtil.getConnection();
+            Statement cstm =con.createStatement();
+            ResultSet rs = cstm.executeQuery(sql);
+            while (rs.next()) {
+
+                listusCus.add(getusCus(rs));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return listusCus;
+    }
+
+    public static Users getusCus(ResultSet rs) throws SQLException {
+       
+        Users user = new Users();
+       
+        user.setUserName(rs.getString("user_name"));
+        user.setUserphone(rs.getString("user_phone"));
+        user.setUseremail(rs.getString("user_email"));
+        return user;
+    }
     // ---------------------------------------------------------------//
 
 }

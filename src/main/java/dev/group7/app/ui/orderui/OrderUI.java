@@ -3,6 +3,8 @@ package dev.group7.app.ui.orderui;
 import java.util.Scanner;
 import dev.group7.app.bl.OrderBL;
 import dev.group7.app.bl.ProductBL;
+import dev.group7.app.bl.UsersBL;
+import dev.group7.app.dal.OrderDAL;
 import dev.group7.app.dal.UsersDAL;
 import dev.group7.app.ui.Method;
 import dev.group7.app.persistance.Order;
@@ -19,8 +21,11 @@ public class OrderUI {
     static Method mt = new Method();
     static ProductBL pbl = new ProductBL();
     static OrderUI oui = new OrderUI();
-    static OrderDetailsUI odui = new OrderDetailsUI();
+    // static OrderDetailsUI odui = new OrderDetailsUI();
+    static UsersBL ubl = new UsersBL();
     static int idus = 0;
+    static OrderDAL odal = new OrderDAL();
+    static int idod = odal.reOrderID();
 
     // ================-----------=================
     public void showAllOrder() {
@@ -39,6 +44,106 @@ public class OrderUI {
         }
         System.out.println(
                 "+----------------------------------------------------------------------------------------------+");
+    }
+
+    public void showAllOrderBid() {
+
+        System.out.print("enter orderid you want to see: ");
+        int id = Integer.parseInt(sc.nextLine());
+        List<Order> lbid = obl.orderbid(id);
+        List<Order> ltotal = obl.ordertotal(id);
+        List<Users> listCus = ubl.getInfoCus(id);
+        for (Users user : listCus) {
+            System.out.println("===========================================================================================");
+            System.out.printf("| %-30s | %-26s | %-25s |\n", "Prepared by:", "Invoice by:", "Invoice details:");
+            System.out.printf("| %-30s | %-26s | %-25s |\n", "Men's clothing store", user.getUserName(),
+                    user.getUserphone());
+            System.out.printf("| %-30s | %-26s | %-25s |\n", "", "", user.getUseremail());
+            System.out.println("-------------------------------------------------------------------------------------------");
+            System.out.printf("| %-30s | %-12s | %-11s | %-25s |\n", "Product Name", "Unit price", "Quantity",
+                    "Total Price");
+            System.out.println("+=========================================================================================+");
+        }
+        if (lbid.isEmpty()) {
+            System.out.println("Empty list!");
+        } else {
+            for (Order o : lbid) {
+                System.out.printf("| %-30s | %-11s | %-11s | %-25s |\n", o.getProduct().getPro_name(),
+                        o.getProduct().getUnitPrice()+" VND", o.getQuantity(),
+                        o.getProduct().getUnitPrice() * o.getQuantity()+" VND");
+            }
+        }
+        for (Order order2 : ltotal) {
+            System.out.println("-------------------------------------------------------------------------------------------");
+            System.out.printf("| %-40s   %-17s: %-25s |\n", "", "Total Price", order2.getTotal_price()+" VND");
+            System.out.println("===========================================================================================");
+        }
+
+    }
+
+    // =========================
+    public void showorderbyuser() {
+
+        System.out.print("enter orderid you want to see: ");
+        try {
+            int id = Integer.parseInt(sc.nextLine());
+            if (getidOrderbyUser(id)) {
+                List<Order> lbid = obl.orderbid(id);
+                List<Order> ltotal = obl.ordertotal(id);
+                List<Users> listCus = ubl.getInfoCus(id);
+                for (Users user : listCus) {
+                    System.out.println("===========================================================================================");
+                    System.out.printf("| %-30s | %-26s | %-25s |\n", "Prepared by:", "Invoice by:", "Invoice details:");
+                    System.out.printf("| %-30s | %-26s | %-25s |\n", "Men's clothing store", user.getUserName(),
+                            user.getUserphone());
+                    System.out.printf("| %-30s | %-26s | %-25s |\n", "", "", user.getUseremail());
+                    System.out.println("-------------------------------------------------------------------------------------------");
+                    System.out.printf("| %-30s | %-12s | %-11s | %-25s |\n", "Product Name", "Unit price", "Quantity",
+                            "Total Price");
+                    System.out.println("+=========================================================================================+");
+                }
+                
+                if (lbid.isEmpty()) {
+                    System.out.println("Empty list!");
+                } else {
+                    for (Order o : lbid) {
+        
+                        System.out.printf("| %-30s | %-11s | %-11s | %-25s |\n", o.getProduct().getPro_name(),
+                                o.getProduct().getUnitPrice()+" VND", o.getQuantity(),
+                                o.getProduct().getUnitPrice() * o.getQuantity()+" VND");
+                    }
+                }
+                for (Order order2 : ltotal) {
+                    System.out.println("-------------------------------------------------------------------------------------------");
+                    System.out.printf("| %-40s   %-17s: %-25s |\n", "", "Total Price", order2.getTotal_price()+" VND");
+                    System.out.println("===========================================================================================");
+                }
+            }else{
+                System.out.println("Your order id does not exist!");
+                
+            }
+        } catch (Exception e) {
+            System.out.println("Input wrong type!");
+            
+        }
+
+    }
+
+    // =========================
+    public static boolean getidOrderbyUser(int id) {
+   
+        // System.out.print("enter order_id: ");
+        // int idorder = Integer.parseInt(sc.nextLine());
+        List<Order> order = obl.getbyiduser();
+        for (Order orderid : order) {
+            if (orderid.getOrder_id() == id) {
+
+                return true;
+            } 
+        }
+
+       
+        return false;
     }
 
     public void showAllOrderById() {
@@ -131,6 +236,22 @@ public class OrderUI {
         return check;
     }
 
+    public static Users getInforUsers(int id) {
+
+        List<Users> lst = ubl.getAllus();
+        Users rs_users = null;
+        for (Users user : lst) {
+            if (id == user.getUserId()) {
+                rs_users = user;
+            }
+        }
+        if (rs_users.equals(null)) {
+            return null;
+        } else {
+            return rs_users;
+        }
+    }
+
     // tao order
     public static Order ordernew() {
         Order order = new Order();
@@ -138,7 +259,8 @@ public class OrderUI {
         idus = UsersDAL.idus;// id người dùng đăng nhập
         Users user = new Users();
         user.setUserId(idus);
-        // set user_ID
+        user = getInforUsers(idus);
+
         order.setUsers(user);
 
         Calendar c = Calendar.getInstance();
@@ -150,17 +272,18 @@ public class OrderUI {
         String order_date = day + "/" + (month + 1) + "/" + year;
         // set Date
         order.setLocal_DT(order_date);// set ngày tạo
-        String status = "0"; // Set status
+        String status = "pending"; // Set status
         order.setStatus(status);
         return order;
     }
+
+    static List<Order> listorderdetail = new ArrayList<>();
 
     // tao orderdetail
     public Order Orderdetailsnew() throws SQLException {
         Product product = new Product();
         Order orderdetail = new Order();
         int id;
-        // đếm sản phẩm thứ ?
         int amount = 0;// số sản phẩm mua
         while (true) {
             while (true) {
@@ -171,6 +294,10 @@ public class OrderUI {
                         System.out.print("ID does not exist !\n Re-enter! ");
                     } else {
                         product = getItem(id);
+                        System.out.println("You are choosing to buy the product " + product.getPro_name());
+                        product.setPro_name(product.getPro_name());
+                        product.setUnitPrice(product.getUnitPrice());
+                        orderdetail.setProduct(product);
                         orderdetail.setPro_id(product.getPro_id());
                         break;
                     }
@@ -185,6 +312,7 @@ public class OrderUI {
                 try {
 
                     amount = Integer.parseInt(sc.nextLine());
+
                     if (amount > product.getAmount()) {
                         System.out.printf("The store has only %d items left", product.getAmount());
                         System.out.print("Enter any key to continue...");
@@ -202,7 +330,7 @@ public class OrderUI {
                             // total_price = orderdetail.getQuantity() * orderdetail.getUnit_price();
                             w = false;
                             break;
-                        } else if (amount < 0) {
+                        } else if (amount <= 0) {
                             System.out.println("Quantity must be greater than 0!\n");
                             System.out.print("Re-enter!\n");
                         } else {
@@ -213,16 +341,14 @@ public class OrderUI {
                     System.out.println("Input wrong data type!");
                     continue;
                 }
+
             }
             pbl.UpdatePro(product);
             return orderdetail;
         }
     }
 
-    static double total;
-    static List<Order> listorderdetail = new ArrayList<>();
-
-    public void getOrderdetainew(Order orderdt) {
+    public static void getOrderdetainew(Order orderdt) {
         listorderdetail.add(orderdt);
     }
 
@@ -235,40 +361,83 @@ public class OrderUI {
             getOrderdetainew(taoOrderDt);
             while (true) {
                 System.out.print("Do you want to add products?(y/n): ");
-                choice = mt.yesno();
-                if (choice.equalsIgnoreCase("y")) {
-                    break;
-                } else if (choice.equalsIgnoreCase("n")) {
-                    Order call_order = re_total();
-                    boolean rs_insert = obl.insert(call_order, listorderdetail);
-                    if (rs_insert) {
-                        System.out.println("Create Order Successful!!!>");
+                try {
+                    choice = mt.yesno();
+                    if (choice.equalsIgnoreCase("y")) {
+                        break;
+                    } else if (choice.equalsIgnoreCase("n")) {
+                        // checkamount();
+                        Order call_order = ordernew();
+                        call_order.setTotal_price(re_total());
+                        boolean rs_insert = obl.insert(call_order, listorderdetail);
+                        if (rs_insert) {
+                            System.out.println("Create Order Successful!!!>");
+                            orderjustcreated(call_order, listorderdetail);
+
+                            listorderdetail.clear();
+
+                        } else {
+                            System.out.println("Create Order Fail!!!>");
+                        }
+                        break;
                     } else {
-                        System.out.println("Create Order Fail!!!>");
+                        System.out.print("Re-enter! ");
+                        // sc.nextLine();
                     }
-                    break;
-                } else {
-                    System.out.print("Re-enter! ");
-                    // sc.nextLine();
+                } catch (Exception e) {
+                    // TODO: handle exception
                 }
+
             }
         } while (choice.equalsIgnoreCase("y"));
     }
 
     // return order with totalprice
-    public static Order re_total() {
-        Order taoOrder = ordernew();
+    public static double re_total() {
+        // Order taoOrder = ordernew();
+        double total = 0;
         for (Order orderdt : listorderdetail) {
             total += orderdt.getUnit_price() * orderdt.getQuantity();
         }
-        taoOrder.setTotal_price(total);
-        return taoOrder;
+
+        return total;
+    }
+
+    public void orderjustcreated(Order order, List<Order> listorder) {
+        System.out.println("===========================================================================================");
+        System.out.printf("| %-30s | %-26s | %-25s |\n", "Prepared by:", "Invoice by:", "Invoice details:");
+        System.out.printf("| %-30s | %-26s | %-25s |\n", "Men's clothing store", order.getUsers().getUserName(),
+                order.getUsers().getUserphone());
+        System.out.printf("| %-30s | %-26s | %-25s |\n", "", "", order.getUsers().getUseremail());
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.printf("| %-30s | %-12s | %-11s | %-25s |\n", "Product Name", "Unit price", "Quantity",
+                "Total Price");
+        System.out.println("+=========================================================================================+");
+        if (listorder.isEmpty()) {
+            System.out.println("Empty list!");
+        } else {
+            for (Order o : listorder) {
+                System.out.printf("| %-30s | %-11s | %-11s | %-25s |\n", o.getProduct().getPro_name(),
+                        o.getProduct().getUnitPrice()+" VND", o.getQuantity(),
+                        o.getProduct().getUnitPrice() * o.getQuantity()+" VND");
+            }
+        }
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.printf("| %-40s   %-17s: %-25s |\n", "", "Total Price", order.getTotal_price()+"VND");
+        System.out.println("===========================================================================================");
     }
 
     // =============================----------===============================
     public void Manage_Order_Customer() {
         oui.showAllOrderById();
-        odui.showOrderdetailsById();
+        System.out.print("Do you want view Order details?\nEnter (y/n): ");
+        String choice = sc.nextLine();
+        if (choice.equalsIgnoreCase("y")) {
+            oui.showorderbyuser();
+
+        } else {
+
+        }
     }
 
     public void Manage_Order_Admin() {
@@ -285,7 +454,7 @@ public class OrderUI {
                 System.out.println("| 2.           View All Order          |");
                 System.out.println("| 0.               Exits               |");
                 System.out.println("+--------------------------------------+");
-                System.out.print("Enter Your's Choice: ");
+                System.out.print("Enter Your's Choice[1 , 2 or 0]: ");
                 String choice = sc.nextLine();
                 switch (choice) {
                     case "1":
@@ -311,7 +480,11 @@ public class OrderUI {
                         System.out.println("+--------------------------------------+");
                         System.out.println("\nList Orders");
                         oui.showAllOrder();
-                        odui.showOrderdetails();
+                        System.out.print("Do you want view Order details?\nEnter (y/n): ");
+                        String id = sc.nextLine();
+                        if (id.equalsIgnoreCase("y")) {
+                            oui.showAllOrderBid();
+                        }
                         System.out.print("Enter any key to continue...");
                         sc.nextLine();
                         break;

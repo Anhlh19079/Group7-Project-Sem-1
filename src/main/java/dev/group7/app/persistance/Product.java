@@ -7,6 +7,8 @@ public class Product {
     private int Pro_amount;
     private String Pro_status;
     private String Pro_description;
+    private  String pro_pack;
+    private  int Category_ID;
 
     public Product() {
     };
@@ -69,5 +71,20 @@ public class Product {
     public String getDescription() {
         return Pro_description;
     }
+    public String getpro_pack(){
+        return pro_pack;
+    }
+    public void setpro_pack(String pro_pack){
+        this.pro_pack=pro_pack;
+    }
 
+    public int getCategory_ID(){
+        return Category_ID;
+    }
+    public void setCategory_ID(int category_ID){
+        this.Category_ID=category_ID;
+    }
+
+
+    
 }

@@ -21,16 +21,17 @@ public class OrderBL {
         return ORD.updateOrder(order);
     }
 
-    public List<Order> OrderDetailsById() {
-        return ORD.getAllOrderDetalsById();
-    }
-
-    public List<Order> ALLOrderDetails() {
-        return ORD.getAllOrderDetals();
-    }
-
     public List<Order> OrderById() {
         return ORD.getAllOrdersById();
     }
+    public List<Order> orderbid(int id) {
+        return ORD.getOrderCustomerById(id);
+    }
+    public List<Order> ordertotal(int id){
+        return ORD.getTotalPriceOfOrder(id);
+    }
 
+    public List<Order> getbyiduser(){
+        return ORD.getidbyusers();
+    }
 }

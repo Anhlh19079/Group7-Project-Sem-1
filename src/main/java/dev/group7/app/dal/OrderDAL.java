@@ -9,12 +9,86 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
+import java.sql.CallableStatement;
+import dev.group7.app.bl.ProductBL;
 import dev.group7.app.persistance.Order;
+import dev.group7.app.persistance.Product;
+import dev.group7.app.persistance.Users;
+import dev.group7.app.ui.orderui.OrderUI;
 
 public class OrderDAL {
+    
 
+    static ProductBL pbl = new ProductBL();
     static UsersDAL udal = new UsersDAL();
+    static OrderUI oui = new OrderUI();
 
+    public List<Order> getOrderCustomerById(int id) {
+        CallableStatement cstm = null;
+        List<Order> litsorder = new ArrayList<>();
+        try {
+            String sql = "{call showorderbid (" + id + ")}";
+            Connection con = DBUtil.getConnection();
+            cstm = con.prepareCall(sql);
+            ResultSet rs = cstm.executeQuery();
+            while (rs.next()) {
+
+                litsorder.add(getordrbid(rs));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return litsorder;
+    }
+
+    public static Order getordrbid(ResultSet rs) throws SQLException {
+        Order odtid = new Order();
+        Users user = new Users();
+        Product product = new Product();
+       
+        user.setUserName(rs.getString("user_name"));
+        user.setUserphone(rs.getString("user_phone"));
+        user.setUseremail(rs.getString("user_email"));
+        odtid.setUsers(user);
+        product.setPro_name(rs.getString("pro_name"));
+        product.setUnitPrice(rs.getDouble("unit_price"));
+        odtid.setProduct(product);
+        // odtid.setUnit_price(rs.getDouble("Unit_price"));
+        odtid.setQuantity(rs.getInt("quantity"));
+        odtid.setTotal_price(rs.getDouble("total"));
+        odtid.setTotal_price(rs.getDouble("order_totalPrice"));
+
+        return odtid;
+    }
+
+    public List<Order> getTotalPriceOfOrder(int id) {
+        
+        List<Order> listtotal = new ArrayList<>();
+        try {
+            String sql = "select * from orders where order_id="+id;
+            Connection con = DBUtil.getConnection();
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+
+                listtotal.add(gettotalprice(rs));
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return listtotal;
+    }
+    public static Order gettotalprice(ResultSet rs) throws SQLException {
+        Order ordertotal = new Order();
+       
+        ordertotal.setTotal_price(rs.getDouble("order_totalPrice"));
+
+        return ordertotal;
+    }
     public List<Order> getAllOrders() {
         String sql = "select * from orders";
         List<Order> lod = new ArrayList<>();
@@ -47,22 +121,30 @@ public class OrderDAL {
         }
         return lbid;
     }
-
-    public List<Order> getAllOrderDetals() {
-        String sql = "select * from orderdetails";
-        List<Order> ldt = new ArrayList<>();
+    public List<Order> getidbyusers() {
+        int idus = 0;
+        idus += udal.idus;
+        List<Order> lbid = new ArrayList<>();
         try (Connection con = DBUtil.getConnection();
                 Statement stm = con.createStatement();
-                ResultSet rs = stm.executeQuery(sql)) {
+                ResultSet rs = stm.executeQuery("select order_id from orders o inner join users u on o.user_id=u.user_id where u.user_id =" + idus)) {
             while (rs.next()) {
-                ldt.add(getOrderdt(rs));
+                lbid.add(getid(rs));
             }
         } catch (SQLException ex) {
-            ldt = null;
+            lbid = null;
             System.out.println(ex.toString());
         }
-        return ldt;
+        return lbid;
     }
+    public static Order getid(ResultSet rs) throws SQLException {
+        Order odtid = new Order();
+        odtid.setOrder_id(rs.getInt("Order_id"));
+        
+
+        return odtid;
+    }
+    
 
     public List<Order> getAllOrderDetalsById() {
         int idus = 0;
