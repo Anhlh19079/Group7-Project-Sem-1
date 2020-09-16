@@ -22,19 +22,20 @@ public class ProductUI {
             List<Product> listpro = pbl.getByName(name);
             System.out.println("\nItem List: ");
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------------------------------+");
-            System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", "ID", "Product Name",
-                    "Unit Price", "Amount", "Status", "Description");
+                    "+-----------------------------------------------------------------------------------------------------------------------------------+");
+            System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", "ID", "Product Name", "Pack",
+                    "Unit Price", "Amount", "Description", "Status");
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------------------------------+");
+                    "+-----------------------------------------------------------------------------------------------------------------------------------+");
             if (listpro.isEmpty())
                 System.out.println("The list is empty!");
             for (Product p : listpro) {
-                System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", p.getPro_id(),
-                        p.getPro_name(), p.getUnitPrice()+" VND", p.getAmount(), p.getPro_status(), p.getDescription());
+                System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", p.getPro_id(),
+                        p.getPro_name(), p.getpro_pack(), p.getUnitPrice() + " VND", p.getAmount(), p.getDescription(),
+                        p.getPro_status());
             }
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------------------------------+");
+                    "+-----------------------------------------------------------------------------------------------------------------------------------+");
 
         } catch (Exception e) {
             // TODO: handle exception
@@ -45,19 +46,19 @@ public class ProductUI {
         List<Product> lst = pbl.getAllPro();
         System.out.println("\nItem List: ");
         System.out.println(
-                "+-------------------------------------------------------------------------------------------------------------------------------+");
-        System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", "ID", "Product Name", "Unit Price",
-                "Amount", "Status", "Description");
+                "+-----------------------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", "ID", "Product Name", "Pack","Unit Price", "Amount", "Description", "Status");
         System.out.println(
-                "+-------------------------------------------------------------------------------------------------------------------------------+");
+                "+-----------------------------------------------------------------------------------------------------------------------------------+");
         if (lst.isEmpty())
             System.out.println("The list is empty!");
         for (Product p : lst) {
-            System.out.printf("| %-10s | %-30s | %-15s | %-10s | %-10s | %-35s | \n", p.getPro_id(), p.getPro_name(),
-                    p.getUnitPrice()+" VND", p.getAmount(), p.getPro_status(), p.getDescription());
+            System.out.printf("| %-5s | %-30s | %-8s | %-15s | %-8s | %-35s | %-10s | \n", p.getPro_id(),
+                    p.getPro_name(), p.getpro_pack(), p.getUnitPrice() + " VND", p.getAmount(), p.getDescription(),
+                    p.getPro_status());
         }
         System.out.println(
-                "+-------------------------------------------------------------------------------------------------------------------------------+");
+                "+-----------------------------------------------------------------------------------------------------------------------------------+");
 
     }
     // ==============================================================================================================
@@ -162,31 +163,45 @@ public class ProductUI {
             Product productdt = inputProduct();
 
             boolean result = pbl.addProduct(productdt);
-            System.out.print("Do you want add size,color,image-url for product?(y/n): ");
-            String yorn = mt.yesno();
-            if (yorn.equalsIgnoreCase("y")) {
+            while (true) {
+                System.out.print("Do you want add size,color,image-url for product?(y/n): ");
+                String yorn = mt.yesno();
+                if (yorn.equalsIgnoreCase("y")) {
 
-                themproduct_sizesandsizes();
+                    themproduct_sizesandsizes();
+                    while (true) {
+                        System.out.print("Add colors?(y/n): ");
+                        String c = mt.yesno();
+                        if (c.equalsIgnoreCase("y")) {
+                            themproduct_colorandcolor();
+                            break;
+                        } else if (c.equalsIgnoreCase("n")) {
+                            break;
+                        } else {
+                            System.out.println("Only y or n! Re-enter");
+                        }
+                    }
+                    while (true) {
+                        System.out.print("Add image-url?(y/n): ");
+                        String i = mt.yesno();
+                        if (i.equalsIgnoreCase("y")) {
+                            themproduct_imaandima();
+                            break;
+                        } else if (i.equalsIgnoreCase("n")) {
+                            break;
+                        } else {
+                            System.out.println("Only y or n! Re-enter");
+                        }
+                    }
 
-                System.out.print("Add colors?(y/n): ");
-                String c = mt.yesno();
-                if (c.equalsIgnoreCase("y")) {
-                    themproduct_colorandcolor();
-
-                }
-                System.out.print("Add image-url?(y/n): ");
-                String i = mt.yesno();
-                if (i.equalsIgnoreCase("y")) {
-                    themproduct_imaandima();
-                }
-            } else {
-                if (result) {
-                    System.out.println("Insert product Successful!!!>");
-
+                    break;
+                } else if (yorn.equalsIgnoreCase("n")) {
+                    break;
                 } else {
-                    System.out.println("Create Order Fail!!!>");
+                    System.out.println("Onlyy y or n! Re-eter");
                 }
             }
+
             if (result) {
                 System.out.println("Insert product Successful!!!>");
 
