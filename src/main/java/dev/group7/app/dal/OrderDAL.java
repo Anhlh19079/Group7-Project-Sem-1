@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import java.sql.CallableStatement;
 import dev.group7.app.bl.ProductBL;

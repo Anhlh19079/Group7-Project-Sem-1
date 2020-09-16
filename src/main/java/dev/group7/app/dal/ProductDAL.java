@@ -44,36 +44,7 @@ public class ProductDAL {
         }
         return litspro;
     }
-    // INSERTPRODUCT OLD
-    // public int insertProduct(Product product) {
-    // try (Connection con = DBUtil.getConnection();
-    // PreparedStatement pstm = con.prepareStatement(
-    // "insert into Products(Pro_name, Unit_price, Pro_amount, Pro_status,
-    // Pro_description) values (?,?,?,?,?)");) {
-    // pstm.setString(1, product.getPro_name());
-    // pstm.setDouble(2, product.getUnitPrice());
-    // pstm.setInt(3, product.getAmount());
-    // pstm.setString(4, product.getPro_status());
-    // pstm.setString(5, product.getDescription());
-    // return pstm.executeUpdate();
-    // } catch (SQLException ex) {
-    // System.out.println("insert fail!");
-    // System.out.println(ex.toString());
-    // return 0;
-
-    // }
-    // }
-    // //GETPRODUCT OLD
-    // // public Product getProduct(ResultSet rs) throws SQLException {
-    // // Product product = new Product();
-    // // product.setPro_id(rs.getInt("Pro_id"));
-    // // product.setPro_name(rs.getString("Pro_name"));
-    // // product.setUnitPrice(rs.getDouble("Unit_price"));
-    // // product.setAmount(rs.getInt("Pro_amount"));
-    // // product.setPro_status(rs.getString("Pro_status"));
-    // // product.setDescription(rs.getString("Pro_description"));
-    // // return product;
-    // // }
+    
 
     public int update(Product product) throws SQLException {
         try (Connection con = DBUtil.getConnection();
